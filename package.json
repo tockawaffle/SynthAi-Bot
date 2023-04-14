@@ -1,0 +1,63 @@
+{
+    "name": "discord-gpt",
+    "version": "0.0.1",
+    "description": "A Discord bot that integrates OpenAI's ChatGPT API, with more AI's to be integrated",
+    "main": "dist/src/bot.js",
+    "scripts": {
+        "dev": "ts-node --files src/bot.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tockawaffle/Discord-GPT.git"
+    },
+    "keywords": [
+        "Discord",
+        "ChatGPT",
+        "OpenAI",
+        "AI",
+        "IA",
+        "Discord",
+        "Bot",
+        "Bot"
+    ],
+    "author": "tockawaffle",
+    "license": "Unlicense",
+    "bugs": {
+        "url": "https://github.com/tockawaffle/Discord-GPT/issues"
+    },
+    "homepage": "https://github.com/tockawaffle/Discord-GPT#readme",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "dependencies": {
+        "@tockawa/wokcommands": "^2.1.3",
+        "chatgpt": "^5.2.2",
+        "discord.js": "^14.9.0",
+        "dotenv": "^16.0.3",
+        "mongoose": "^7.0.3"
+    },
+    "nodemonConfig": {
+        "ignore": [
+            "node_modules",
+            "dist",
+            "src/assets/"
+        ],
+        "watch": [
+            "src",
+            "types",
+            "modules",
+            "package.json"
+        ],
+        "ext": "ts,json",
+        "exec": "npm run dev",
+        "execMap": {
+            "ts": "ts-node"
+        },
+        "verbose": true,
+        "execOptions": {
+            "env": {
+                "NODE_ENV": "development"
+            }
+        }
+    }
+}

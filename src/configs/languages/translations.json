@@ -1,0 +1,21 @@
+{
+    "languages": ["english", "portugues"],
+    "traduzido": {
+        "defaults": {
+            "noPerms": {
+                "english": "You don't have permission to use this command. Required permission: %s",
+                "portugues": "Você não tem permissão para usar este comando. Permissão necessária: %s"
+            }
+        },
+        "config": {
+            "invalidCategory": {
+                "english": "%s is an invalid category. Try again.",
+                "portugues": "Categoria %s inválida. Tente novamente."
+            },
+            "gptCategorySet": {
+                "english": "ChatGPT Category set to: %s",
+                "portugues": "Categoria do ChatGPT definida para: %s"
+            }
+        }
+    }
+}
