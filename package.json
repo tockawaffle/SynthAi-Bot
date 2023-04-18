@@ -4,7 +4,10 @@
     "description": "A Discord bot that integrates OpenAI's ChatGPT API, with more AI's to be integrated",
     "main": "dist/src/bot.js",
     "scripts": {
-        "dev": "ts-node --files src/bot.ts"
+        "dev": "ts-node --files src/bot.ts",
+        "build": "tsc",
+        "watch": "tsc -w",
+        "start": "node dist/src/bot.js"
     },
     "repository": {
         "type": "git",
