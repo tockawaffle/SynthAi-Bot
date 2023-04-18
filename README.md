@@ -52,6 +52,7 @@ GPT-3.5 is a state-of-the-art natural language processing model developed by Ope
 - [ ] Integration with Stable Diffusion.
 - [ ] Integration with DALL-E for image creation
 - [ ] Monetization through either: Kofi, Patreon or Github Esponsorship.
+- [ ] Moderation feature through [OpenAI moderation API](https://platform.openai.com/docs/api-reference/moderations) - This is going to make your server boring tho.
 - [X] Cats, lots of them, I love cats.
 
 ---
