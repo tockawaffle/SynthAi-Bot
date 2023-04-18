@@ -3,6 +3,7 @@ export default interface serverSchema extends Document {
     channels: {
         gptCategory: string;
         whisperLabsCategory: string;
+        commandsChannel: string;
         // welcomeChannel?: string;
         // rulesChannel?: string;
     };

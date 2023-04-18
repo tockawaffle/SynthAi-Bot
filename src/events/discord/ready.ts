@@ -1,12 +1,15 @@
-import { Events, Client } from "discord.js";
+    import { Events, Client } from "discord.js";
 import { wokOptions } from "../../configs/client/clientOptions";
 
 import WOK from "@tockawa/wokcommands";
 import { checkCommands } from "../../configs/validators/commands/validations/checkCommands";
+import { loadChannels } from "../../configs/database/functions/getRegChannels";
+import checkMissingGuilds from "../../configs/database/functions/getGuilds";
 import translateText, {
     loadUserSettings,
     setUserLanguage,
 } from "../../configs/languages/lang";
+import ChatGPT, { defineUsers } from "../../configs/ais/gpt/ChatGPT";
 
 module.exports = {
     name: Events.ClientReady,
@@ -20,6 +23,10 @@ module.exports = {
             `> Logado como ${client.user?.tag}!`
         );
 
+        await ChatGPT(process.env.GPT_KEY!, client);
+        await defineUsers(client)
+        await checkMissingGuilds(client);
+        await loadChannels(client)
         await loadUserSettings(client);
 
         client.loadUser = loadUserSettings;

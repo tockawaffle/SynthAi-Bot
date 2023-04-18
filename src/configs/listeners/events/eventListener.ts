@@ -18,9 +18,9 @@ export default async function (client: Client, dir: string) {
         const filePath = path.join(dir, file);
         const { name, execute, once } = await import(filePath);
         if (once) {
-            client.once(name, (...args: any) => execute(...args));
+            client.once(name, (...args: any) => execute(...args, client));
         } else {
-            client.on(name, (...args: any) => execute(...args));
+            client.on(name, (...args: any) => execute(...args, client));
         }
     }
 }

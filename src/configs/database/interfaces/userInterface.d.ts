@@ -8,12 +8,43 @@ export default interface userSchema extends Document {
     };
     artificialInteligence: {
         chatGPT: {
-            avaiableTokens: number;
+            avaiableUsage: number;
             tokensUsed: number;
         };
         whisperLabs: {
-            avaiableTokens: number;
+            avaiableUsage: number;
             tokensUsed: number;
+        };
+    };
+    premium: {
+        free: boolean;
+        freemium: boolean;
+        premium: boolean;
+        premiumPlus: boolean;
+        supporter: boolean;
+        supporterPlus: boolean;
+        unlimited: boolean;
+    };
+    channels?: {
+        gptChat: {
+            chat: [
+                {
+                    serverId: string;
+                    channelId: string;
+                    threadId: string;
+                    model: string;
+                }
+            ];
+        };
+        bingChat: {
+            chat: [
+                {
+                    serverId: string;
+                    channelId: string;
+                    threadId: string;
+                    model: string;
+                }
+            ];
         };
     };
 }

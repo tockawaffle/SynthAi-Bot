@@ -55,7 +55,13 @@ export default [
         options: [
             {
                 name: "language",
+                nameLocalizations: {
+                    "pt-BR": "idioma",
+                },
                 description: "Set the language you want to use.",
+                descriptionLocalizations: {
+                    "pt-BR": "Defina o idioma que você deseja usar.",
+                },
                 type: ApplicationCommandOptionType.String,
                 required: true,
                 choices: [
@@ -65,7 +71,7 @@ export default [
                     },
                     {
                         name: "Portuguese",
-                        value: "portuguese",
+                        value: "portugues",
                     },
                 ],
             },

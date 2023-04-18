@@ -7,6 +7,7 @@ const serverSchema = new Schema<serverSchema>({
     channels: {
         gptCategory: { type: String, required: true },
         whisperLabsCategory: { type: String, required: true },
+        commandsChannel: { type: String, required: true },
         // welcomeChannel: { type: String, required: false },
         // rulesChannel: { type: String, required: false },
     },

@@ -6,16 +6,30 @@ const userSchema = new Schema<userSchema>({
     createdAt: { type: Date, required: true, default: Date.now },
     accountSettings: {
         language: { type: String, required: true, default: "english" },
-        id: { type: String, required: true, },
+        id: { type: String, required: true },
     },
     artificialInteligence: {
         chatGPT: {
-            avaiableTokens: { type: Number, required: true, default: 100 },
+            avaiableUsage: { type: Number, required: true, default: 100 },
             tokensUsed: { type: Number, required: true, default: 0 },
         },
         whisperLabs: {
-            avaiableTokens: { type: Number, required: true, default: 50 },
+            avaiableUsage: { type: Number, required: true, default: 50 },
             tokensUsed: { type: Number, required: true, default: 0 },
+        },
+    },
+    premium: {
+        free: { type: Boolean, required: true, default: true },
+        freemium: { type: Boolean, required: true, default: false },
+        premium: { type: Boolean, required: true, default: false },
+        premiumPlus: { type: Boolean, required: true, default: false },
+        supporter: { type: Boolean, required: true, default: false },
+        supporterPlus: { type: Boolean, required: true, default: false },
+        unlimited: { type: Boolean, required: true, default: false },
+    },
+    channels: {
+        gptChat: {
+            chat: { type: Array, required: true },
         },
     },
 });

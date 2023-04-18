@@ -10,10 +10,12 @@ export const clientOptions = {
         GatewayIntentBits.GuildModeration,
         GatewayIntentBits.GuildEmojisAndStickers,
         GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences,
         GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.GuildWebhooks,
         GatewayIntentBits.DirectMessageReactions,
         GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.MessageContent
     ],
     partials: [
         Partials.GuildMember,

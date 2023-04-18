@@ -19,7 +19,7 @@ export async function checkCommands(client: Client, instance: any) {
     const guildCommands = client.guilds.cache.map((guild) => {
         const commandName = guild.commands.cache.map((command) => command.name);
         return commandName[0];
-    })
+    });
 
     const clientCommandsArray: string[] = [];
     clientCommands.forEach((command) => {
@@ -27,10 +27,10 @@ export async function checkCommands(client: Client, instance: any) {
     });
 
     const commandsToDelete = clientCommandsArray.filter(
-        (command) => !instanceCommandsArray.includes(command) && !guildCommands.includes(command)
+        (command) =>
+            !instanceCommandsArray.includes(command) &&
+            !guildCommands.includes(command)
     );
-
-    console.log(commandsToDelete)
 
     let index = 0;
     if (commandsToDelete.length > 0) {

@@ -5,6 +5,18 @@
             "noPerms": {
                 "english": "You don't have permission to use this command. Required permission: %s",
                 "portugues": "Você não tem permissão para usar este comando. Permissão necessária: %s"
+            },
+            "madeBy": {
+                "english": "Made by тоска (тоска#0001) with 🖤",
+                "portugues": "Feito por тоска (тоска#0001) com 🖤"
+            },
+            "notImplemented": {
+                "english": "This function is not yet implemented, please try again later.",
+                "portugues": "Esta função ainda não foi implementada, tente novamente mais tarde."
+            },
+            "moderationFlagged": {
+                "english": "Your message was flagged as inappropriate by our moderation system. The following flags were found:",
+                "portugues": "Sua mensagem foi marcada como inadequada por nosso sistema de moderação. As seguintes infrações foram encontradas:"
             }
         },
         "config": {
@@ -15,6 +27,40 @@
             "gptCategorySet": {
                 "english": "ChatGPT Category set to: %s",
                 "portugues": "Categoria do ChatGPT definida para: %s"
+            },
+            "invalidLang": {
+                "english": "%s is an invalid language. Try again.",
+                "portugues": "Idioma %s é inválido. Tente novamente."
+            },
+            "langTitle": {
+                "english": "✅ Language Set!",
+                "portugues": "✅ Idioma Configurado!"
+            },
+            "langDescription": {
+                "english": "Language set to: %s",
+                "portugues": "Idioma definido para: %s"
+            },
+            "missingServer": {
+                "english": "This server doesn't exist on my database, something might've gone wrong or I was offline when I was added to this server. Please, remove me and add me again.",
+                "portugues": "Este servidor não existe no meu banco de dados, algo pode ter dado errado ou eu estava offline quando fui adicionado a este servidor. Por favor, remova-me e adicione-me novamente."
+            }
+        },
+        "startChat": {
+            "categoryNotSet": {
+                "english": "The category for the chat is not set, ask an admin to set it up using the 'config' command. Or, you can start a DM chat with me.",
+                "portugues": "A categoria do chat não está definida, peça a um administrador para configurá-la usando o comando 'config'. Ou então, você pode iniciar um PV comigo."
+            },
+            "noUserDb": {
+                "english": "You don't have a user database, you might've opted-out from this bot, opt-in to use me.",
+                "portugues": "Você não tem um banco de dados de usuário, você pode ter optado por não usar este bot, opte por usar-me."
+            },
+            "chatStarted": {
+                "english": "Chat started at %s, go there to chat with me!",
+                "portugues": "Chat iniciado com %s, vá até aquele chat para conversar comigo!"
+            },
+            "missingChannel": {
+                "english": "I couldn't find the channel that was assigned to you, I'm resetting it, try again.",
+                "portugues": "Não consegui encontrar o canal que foi atribuído a você, estou redefinindo-o, tente novamente."
             }
         }
     }
