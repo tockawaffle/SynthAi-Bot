@@ -48,9 +48,9 @@ GPT-3.5 is a state-of-the-art natural language processing model developed by Ope
 
 - [ ] Creation of a token quota (These APIs aren't free, you know?)
 - [ ] Integration with [Whisper ASR](https://openai.com/research/whisper) for voice-based interactions
-- [ ] Integration with Bing Chat for more robust chatbot functionality
+- [X] Integration with Bing Chat for more robust chatbot functionality
 - [ ] Integration with [Eleven Labs](https://beta.elevenlabs.io/) for personalized voice interfaces
-- [ ] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
+- [X] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
 - [ ] Integration with Stable Diffusion.
 - [ ] Integration with DALL-E for image creation
 - [ ] Monetization through either: Kofi, Patreon or Github Esponsorship.
