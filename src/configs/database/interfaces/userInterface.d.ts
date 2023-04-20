@@ -9,11 +9,9 @@ export default interface userSchema extends Document {
     artificialInteligence: {
         chatGPT: {
             avaiableUsage: number;
-            tokensUsed: number;
         };
         whisperLabs: {
             avaiableUsage: number;
-            tokensUsed: number;
         };
     };
     premium: {
@@ -43,6 +41,7 @@ export default interface userSchema extends Document {
                     channelId: string;
                     threadId: string;
                     model: string;
+                    followUp: any
                 }
             ];
         };

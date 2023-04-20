@@ -1,6 +1,6 @@
 {
     "name": "discord-gpt",
-    "version": "0.5.0",
+    "version": "0.5.5",
     "description": "A Discord bot that integrates OpenAI's ChatGPT API, with more AI's to be integrated",
     "main": "dist/src/bot.js",
     "scripts": {
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/tockawaffle/Discord-GPT.git"
+        "url": "git+https://github.com/tockawaffle/SynthAi-Bot.git"
     },
     "keywords": [
         "Discord",
@@ -24,11 +24,11 @@
         "Bot"
     ],
     "author": "tockawaffle",
-    "license": "Unlicense",
+    "license": "AGPL-3.0",
     "bugs": {
-        "url": "https://github.com/tockawaffle/Discord-GPT/issues"
+        "url": "https://github.com/tockawaffle/SynthAi-Bot/issues"
     },
-    "homepage": "https://github.com/tockawaffle/Discord-GPT#readme",
+    "homepage": "https://github.com/tockawaffle/SynthAi-Bot#readme",
     "engines": {
         "node": ">=18.0.0"
     },
@@ -37,8 +37,12 @@
         "bing-chat": "^0.2.3",
         "discord.js": "^14.9.0",
         "dotenv": "^16.0.3",
-        "mongoose": "^7.0.3",
+        "gpt-3-encoder": "^1.1.4",
+        "mongoose": "^7.0.4",
         "openai": "^3.2.1"
+    },
+    "devDependencies": {
+        "@types/node": "^18.15.12"
     },
     "nodemonConfig": {
         "ignore": [

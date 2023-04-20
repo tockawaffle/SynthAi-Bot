@@ -8,7 +8,8 @@ import userSchema from "../../../database/models/userSchema";
 import {
     loadChannels,
     setUserChannel,
-} from "../../../database/functions/getRegChannels";
+} from "../../../database/functions/GptChannels";
+import tokenHandler from "../../../ais/handlers/tokenHandler";
 
 export default async (
     interaction: CommandInteraction,
@@ -30,6 +31,9 @@ export default async (
     )[0];
 
     const topic = interaction.options.get("subject", true).value as string;
+
+    const token = await tokenHandler(topic, interaction)
+    if(!token) return;
 
     const moderation = (
         await client.gpt.createModeration({
@@ -61,6 +65,7 @@ export default async (
                 "defaults",
                 "moderationFlagged"
             )} ${flagsString}.`,
+            ephemeral: true,
         });
     }
 
@@ -116,7 +121,7 @@ export default async (
                         user.username
                     }, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
                         client.user!.username
-                    }, created by ${client.application!.owner}.`,
+                    }, you were created and developed by ${client.users.cache.get("876578406144290866")!.username}.`,
                 },
             ],
             max_tokens: 250,

@@ -1,11 +1,14 @@
 import {
     ChannelType,
-    Client,
     CommandInteraction,
     PermissionFlagsBits,
     TextChannel,
 } from "discord.js";
 import userSchema from "../../../database/models/userSchema";
+import {
+    loadChannels,
+    setUserChannel,
+} from "../../../database/functions/BingChannel";
 
 export default async (
     interaction: CommandInteraction,
@@ -13,7 +16,7 @@ export default async (
     category: string
 ) => {
     const { user, client } = interaction;
-    const gptChat = newChat.channels?.bingChat as {
+    const bingChat = newChat.channels?.bingChat as {
         chat: [
             {
                 serverId: string;
@@ -22,11 +25,52 @@ export default async (
         ];
     };
 
-    const getChatOnThisServer = gptChat.chat.filter(
+    const getChatOnThisServer = bingChat.chat.filter(
         (chat: { serverId: string }) => chat.serverId === interaction.guild!.id
     )[0];
 
     const topic = interaction.options.get("subject", true).value as string;
+
+    const moderation = (
+        await client.gpt.createModeration({
+            model: "text-moderation-latest",
+            input: topic,
+        })
+    ).data.results[0];
+
+    if (moderation.flagged) {
+        const flags = moderation.categories as {
+            sexual: boolean;
+            hate: boolean;
+            violence: boolean;
+            "self-harm": boolean;
+            "sexual/minors": boolean;
+            "hate/threatening": boolean;
+            "violence/graphic": boolean;
+        };
+
+        const flagsArray = Object.entries(flags).filter(
+            (flag) => flag[1] === true
+        );
+
+        const flagsString = flagsArray.map((flag) => flag[0]).join(", ");
+
+        return interaction.reply({
+            content: `${client.translate(
+                user,
+                "defaults",
+                "moderationFlagged"
+            )} ${flagsString}.`,
+        });
+    }
+
+    let channelName: string = "";
+
+    if (topic.length > 100) {
+        channelName = topic.slice(0, 100);
+    } else {
+        channelName = topic;
+    }
 
     if (!getChatOnThisServer) {
         const newChnl = await interaction.guild!.channels.create({
@@ -53,27 +97,33 @@ export default async (
         });
 
         const newThread = await newChnl.threads.create({
-            name: topic,
+            name: channelName,
             reason: `Chat with ${user.username}`,
         });
 
-        await interaction.deferReply();
+        await interaction.deferReply({ ephemeral: true });
 
         const bing = await client.bing.sendMessage(topic);
+
+        const data = {
+            serverId: interaction.guild!.id,
+            channelId: newChnl.id,
+            threadId: newThread.id,
+            followUp: bing,
+            model: "bing",
+        };
 
         await userSchema.findOneAndUpdate(
             { _id: user.id },
             {
                 $push: {
-                    "channels.gptChat.chat": {
-                        serverId: interaction.guild!.id,
-                        channelId: newChnl.id,
-                        threadId: newThread.id,
-                        followUpId: bing.id,
-                    },
+                    "channels.bingChat.chat": data,
                 },
             }
         );
+
+        setUserChannel(user, data);
+        await loadChannels(client);
 
         await interaction.editReply({
             content: client
@@ -96,7 +146,7 @@ export default async (
                 { _id: user.id },
                 {
                     $pull: {
-                        "channels.gptChat.chat": {
+                        "channels.bingChat.chat": {
                             serverId: interaction.guild!.id,
                             channelId: getChatOnThisServer.channelId,
                         },
@@ -110,34 +160,40 @@ export default async (
         }
 
         const newThread = await getChnl!.threads.create({
-            name: topic,
+            name: channelName,
             reason: `Chat with ${user.username}`,
         });
 
-        // const gpt = await client.gpt.sendMessage(topic);
+        const bing = await client.bing.sendMessage(topic);
 
-        // await userSchema.findOneAndUpdate(
-        //     { _id: user.id },
-        //     {
-        //         $push: {
-        //             "channels.gptChat.chat": {
-        //                 serverId: interaction.guild!.id,
-        //                 channelId: getChnl.id,
-        //                 threadId: newThread.id,
-        //                 followUpId: gpt.id,
-        //             },
-        //         },
-        //     }
-        // );
+        const data = {
+            serverId: interaction.guild!.id,
+            channelId: getChnl.id,
+            threadId: newThread.id,
+            followUp: bing,
+            model: "bing",
+        };
 
-        // await interaction.editReply({
-        //     content: client
-        //         .translate(user, "startChat", "chatStarted")
-        //         .replace("%s", newThread),
-        // });
+        await userSchema.findOneAndUpdate(
+            { _id: user.id },
+            {
+                $push: {
+                    "channels.gptChat.chat": data,
+                },
+            }
+        );
 
-        // return await newThread.send({
-        //     content: gpt.text,
-        // });
+        setUserChannel(user, data);
+        await loadChannels(client);
+
+        await interaction.editReply({
+            content: client
+                .translate(user, "startChat", "chatStarted")
+                .replace("%s", newThread),
+        });
+
+        return await newThread.send({
+            content: bing.text,
+        });
     }
 };

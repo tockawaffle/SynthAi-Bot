@@ -2,11 +2,19 @@ import { Client, User } from "discord.js";
 
 import user from "../database/models/userSchema";
 import translations from "./translations.json";
+import optedOut from "../database/models/optedOut";
 
 const userLanguage: any = {};
 
 async function loadUserSettings(client: Client): Promise<void> {
     const userIds = client.users.cache.map((user) => user.id);
+    
+    const optedOutDb = await optedOut.find({ _id: "optedOut" });
+    const optedOutIds: string[] = optedOutDb.flatMap((user) => user.ids);
+    
+    const hasOptedOutUser = userIds.some((userId) => optedOutIds.includes(userId));
+    
+    if (hasOptedOutUser) return;
 
     const foundUsers = await user.find({ _id: { $in: userIds } });
 

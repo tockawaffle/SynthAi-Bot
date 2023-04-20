@@ -10,12 +10,10 @@ const userSchema = new Schema<userSchema>({
     },
     artificialInteligence: {
         chatGPT: {
-            avaiableUsage: { type: Number, required: true, default: 100 },
-            tokensUsed: { type: Number, required: true, default: 0 },
+            avaiableUsage: { type: Number, required: true, default: 15 },
         },
         whisperLabs: {
-            avaiableUsage: { type: Number, required: true, default: 50 },
-            tokensUsed: { type: Number, required: true, default: 0 },
+            avaiableUsage: { type: Number, required: true, default: 5 },
         },
     },
     premium: {
@@ -31,6 +29,9 @@ const userSchema = new Schema<userSchema>({
         gptChat: {
             chat: { type: Array, required: true },
         },
+        bingChat: {
+            chat: { type: Array, required: true },
+        }
     },
 });
 

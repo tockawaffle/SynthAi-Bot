@@ -15,7 +15,7 @@ export const clientOptions = {
         GatewayIntentBits.GuildWebhooks,
         GatewayIntentBits.DirectMessageReactions,
         GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent,
     ],
     partials: [
         Partials.GuildMember,
@@ -29,11 +29,7 @@ export const clientOptions = {
 export const wokOptions = {
     client,
     mongoUri: process.env.MONGO_URI,
-    mongoModals: path.join(__dirname, "../../models"),
-    commandsDir: path.join(__dirname, "../../commands"),
-    defaultLanguage: "english",
-    testServers: [process.env.TEST_SERVERS],
-    botOwners: [process.env.OWNER_ID],
+    commandsDir: path.join(__dirname, "../../commands")
 } as Options;
 
 export const RESTdjs = new REST({ version: "10" }).setToken(

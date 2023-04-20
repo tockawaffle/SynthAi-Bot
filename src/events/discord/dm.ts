@@ -1,4 +1,5 @@
 import { ChannelType, Client, DMChannel, Events, Message } from "discord.js";
+import tokenHandler from "../../configs/ais/handlers/tokenHandler";
 
 module.exports = {
     name: Events.MessageCreate,
@@ -9,6 +10,10 @@ module.exports = {
         if (channel.type !== ChannelType.DM) return;
 
         await message.channel.sendTyping();
+
+        const token = await tokenHandler(message.content, message);
+        console.log(token)
+        if(!token) return;
 
         const moderation = (
             await client.gpt.createModeration({
@@ -77,10 +82,10 @@ module.exports = {
                 {
                     role: "system",
                     content: `You are chatting with ${
-                        author.username
-                    }, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
+                        author.tag
+                    }, his unique id is ${author.id}, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
                         client.user!.username
-                    }, created by ${client.application!.owner}.`,
+                    }, you were created and developed by ${client.users.cache.get("876578406144290866")!.tag}, his unique id is 876578406144290866, when talking to him, you might address him as "creator" or "developer".`,
                 },
                 {
                     role: "assistant",

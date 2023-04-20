@@ -27,7 +27,7 @@ export default [
                 ],
             },
             {
-                name: "whisperlabs-category",
+                name: "bing-category",
                 description:
                     "Set the category so the chat creates a channel for each user.",
                 type: ApplicationCommandOptionType.Subcommand,

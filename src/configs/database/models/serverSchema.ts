@@ -6,7 +6,7 @@ const serverSchema = new Schema<serverSchema>({
     createdAt: { type: Date, required: true, default: Date.now },
     channels: {
         gptCategory: { type: String, required: true },
-        whisperLabsCategory: { type: String, required: true },
+        bingCategory: { type: String, required: true },
         commandsChannel: { type: String, required: true },
         // welcomeChannel: { type: String, required: false },
         // rulesChannel: { type: String, required: false },

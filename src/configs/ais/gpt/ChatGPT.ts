@@ -21,7 +21,5 @@ export async function defineUsers(client: Client) {
         client.users.cache.get(foundUser._id)!.premium = foundUser.premium;
         client.users.cache.get(foundUser._id)!.gptTokensAvailable =
             foundUser.artificialInteligence.chatGPT.avaiableUsage;
-        client.users.cache.get(foundUser._id)!.gptTokensUsed =
-            foundUser.artificialInteligence.chatGPT.tokensUsed;
     }
 }

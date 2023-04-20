@@ -4,6 +4,7 @@ import { REST } from "discord.js";
 import Translator from "../src/configs/languages/lang";
 import { BingChat } from "bing-chat";
 import { OpenAIApi } from "openai";
+import WOK from "@tockawa/wokcommands";
 
 declare module "discord.js" {
     export interface Client {
@@ -14,14 +15,12 @@ declare module "discord.js" {
         setLanguage: Translator["setUserLanguage"];
         translate: Translator["translateText"];
         loadUser: function;
+        WOK: WOK;
     }
     export interface User {
         lang: string;
         gptTokensAvailable: number;
-        gptTokensUsed: number;
         whisperLabsTokensAvailable: number;
-        whisperLabsTokensUsed: number;
-
         premium: {
             free: boolean;
             freemium: boolean;

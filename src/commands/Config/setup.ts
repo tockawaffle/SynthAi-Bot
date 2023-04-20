@@ -1,7 +1,13 @@
 import { CommandObject, CommandType } from "@tockawa/wokcommands";
 import { Client, CommandInteraction, User } from "discord.js";
 
-import { options, gptCategory, language } from "../../configs/commands/exports";
+import {
+    options,
+    gptCategory,
+    language,
+    bingCategory,
+} from "../../configs/commands/exports";
+import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 
 export default {
     description: "Configuration command for the bot's moderators.",
@@ -14,7 +20,7 @@ export default {
         "pt-BR": "Comando de configuração para os moderadores do bot!",
     },
     options,
-    category: "Moderation",
+    category: "Configuration",
     callback: async ({
         client,
         interaction,
@@ -24,6 +30,12 @@ export default {
         interaction: CommandInteraction;
         user: User;
     }) => {
+        if (await handleOptedOut(user)) {
+            return await interaction.reply(
+                "You opted out of this bot, you cannot use any features I have avaiable."
+            );
+        }
+
         const SubCommandGroup = {
             CATEGORIES: "categories",
             LANGUAGE: "language",
@@ -36,7 +48,7 @@ export default {
             case SubCommandGroup.CATEGORIES: {
                 const SubCommand = {
                     GPT_CATEGORY: "gpt-category",
-                    WHISPERLABS_CATEGORY: "whisperlabs-category",
+                    BING_CATEGORY: "bing-category",
                 };
 
                 const subCommandName = interaction.options.data[0].options![0]
@@ -47,14 +59,8 @@ export default {
                         await gptCategory(interaction);
                         break;
                     }
-                    case SubCommand.WHISPERLABS_CATEGORY: {
-                        return await interaction.reply({
-                            content: client.translate(
-                                user,
-                                "defaults",
-                                "notImplemented"
-                            ),
-                        });
+                    case SubCommand.BING_CATEGORY: {
+                        await bingCategory(interaction);
                         break;
                     }
                 }

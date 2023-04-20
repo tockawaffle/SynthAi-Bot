@@ -3,20 +3,28 @@
     "traduzido": {
         "defaults": {
             "noPerms": {
-                "english": "You don't have permission to use this command. Required permission: %s",
-                "portugues": "Você não tem permissão para usar este comando. Permissão necessária: %s"
+                "english": "You do not have the required permission to use this command. The necessary permission is: %ss",
+                "portugues": "Você não possui permissão para utilizar este comando. A permissão necessária é: %s"
             },
             "madeBy": {
                 "english": "Made by тоска (тоска#0001) with 🖤",
                 "portugues": "Feito por тоска (тоска#0001) com 🖤"
             },
             "notImplemented": {
-                "english": "This function is not yet implemented, please try again later.",
+                "english": "This feature has not been implemented yet, please try again later.",
                 "portugues": "Esta função ainda não foi implementada, tente novamente mais tarde."
             },
             "moderationFlagged": {
-                "english": "Your message was flagged as inappropriate by our moderation system. The following flags were found:",
-                "portugues": "Sua mensagem foi marcada como inadequada por nosso sistema de moderação. As seguintes infrações foram encontradas:"
+                "english": "Your message was deemed inappropriate by our moderation system, and the following violations were detected:",
+                "portugues": "Sua mensagem foi considerada inadequada pelo nosso sistema de moderação e foram detectadas as seguintes infrações:"
+            },
+            "missingDb": {
+                "english": "Seems like you are not in my database, did you opted out from using me? If not, please open an issue on my GitHub repository.",
+                "portugues": "Parece que você não está no meu banco de dados, você optou por não usar-me? Se não, abra um issue no meu repositório do GitHub."
+            },
+            "tokenCountLessThan": {
+                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %s tokens.\nBut you can always use Bing!",
+                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %s tokens.\nPorém você pode sempre utilizar o Bing!"
             }
         },
         "config": {
@@ -43,6 +51,10 @@
             "missingServer": {
                 "english": "This server doesn't exist on my database, something might've gone wrong or I was offline when I was added to this server. Please, remove me and add me again.",
                 "portugues": "Este servidor não existe no meu banco de dados, algo pode ter dado errado ou eu estava offline quando fui adicionado a este servidor. Por favor, remova-me e adicione-me novamente."
+            },
+            "bingCategorySet": {
+                "english": "Bing Category set to: %s",
+                "portugues": "Categoria do Bing definida para: %s"
             }
         },
         "startChat": {
@@ -61,6 +73,102 @@
             "missingChannel": {
                 "english": "I couldn't find the channel that was assigned to you, I'm resetting it, try again.",
                 "portugues": "Não consegui encontrar o canal que foi atribuído a você, estou redefinindo-o, tente novamente."
+            }
+        },
+        "opt": {
+            "in": {
+                "english": "You've opted-in to use this bot, you can now use all of its features.",
+                "portugues": "Você optou por usar este bot, agora você pode usar todos os seus recursos."
+            },
+            "unchangedIn": {
+                "english": "You've already opted-in to use this bot, you can now use all of its features.",
+                "portugues": "Você já optou por usar este bot, agora você pode usar todos os seus recursos."
+            },
+            "changedOut": {
+                "english": "You've changed your mind and opted-in to use this bot, you can now use all of its features.",
+                "portugues": "Você mudou de ideia e optou por usar este bot, agora você pode usar todos os seus recursos."
+            },
+            "out": {
+                "english": "You've opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
+                "portugues": "Você optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            },
+            "unchangedOut": {
+                "english": "You've already opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
+                "portugues": "Você já optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            },
+            "changedIn": {
+                "english": "You've changed your mind and opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
+                "portugues": "Você mudou de ideia e optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            }
+        },
+        "help": {
+            "helpTitle": {
+                "english": "Help Menu - %botName%",
+                "portugues": "Menu de Ajuda - %botName%"
+            },
+            "helpDescription": {
+                "english": "Hi, I'm Synth Bot! 👋 I'm here to enhance our interactions on Discord, thanks to my skills powered by GPT-3.5 and Bing. 🧠 I aim to make our conversations more engaging and thrilling! 🎆 Don't hesitate to chat with me, as I'm always up for a good conversation!\n\nMy unique feature allows you to chat with me in an easy and natural way. I can interact with you through specific commands, in a chat created via a command, or even respond to your messages directly in our private conversation.\n\nI'm designed to be intuitive and user-friendly, making me accessible to everyone, regardless of their familiarity with advanced technologies. I'm always ready to help, answer your questions, and engage in interesting conversations throughout your Discord journey.\n\nI'm looking forward to chatting with you and making your Discord experience even more exciting",
+                "portugues": "E aí, galera! Eu sou o Synth Bot! 👋 Tô aqui para melhorar nossas interações no Discord e deixar nossas conversas mais divertidas! 🎆 Pode falar comigo à vontade, tô sempre disponível para bater um papo maneiro! Ah, e o legal é que você pode conversar comigo de um jeito fácil e natural. Tem vários jeitos de interagir comigo: através de comandos específicos, em um chat criado por um comando ou até mesmo direto na nossa conversa privada.\n\nEu sou feito para ser super intuitivo e fácil de usar, então não precisa se preocupar se você não manja muito de tecnologia. Tô aqui pra ajudar e responder às suas perguntas, e sempre tô pronto pra participar de conversas iradas no Discord! Então vamos conversar logo e deixar a nossa experiência no Discord ainda mais emocionante! 🚀"
+            },
+            "helpFooter": {
+                "english": "Made by тоска (%botOwner%) with 🖤",
+                "portugues": "Feito por тоска (%botOwner%) com 🖤"
+            },
+            "helpPlaceholder": {
+                "english": "Choose one!",
+                "portugues": "Escolha um!"
+            },
+            "AI": {
+                "english": "AI",
+                "portugues": "IA"
+            },
+            "aiDescription": {
+                "english": "Shows all commands that are related to AIs.",
+                "portugues": "Mostra todos os comandos relacionados a IAs."
+            },
+            "aiCatTitle": {
+                "english": "🤖 AI Commands",
+                "portugues": "🤖 Comandos de IA"
+            },
+            "aiCatOp": {
+                "english": "Avaiable Options:",
+                "portugues": "Opções Disponíveis:"
+            },
+            "confCatTitle": {
+                "english": "⚙️ Configuration Commands",
+                "portugues": "⚙️ Comandos de Configuração"
+            },
+            "Configuration": {
+                "english": "Configuration",
+                "portugues": "Configuração"
+            },
+            "configurationDescription": {
+                "english": "Shows all commands that are related to server/user configuration.",
+                "portugues": "Mostra todos os comandos relacionados a configuração de servidor/usuário."
+            },
+            "Credits": {
+                "english": "Credits",
+                "portugues": "Créditos"
+            },
+            "creditsDescription": {
+                "english": "Check out the credits for this bot!",
+                "portugues": "Veja os créditos para este bot!"
+            },
+            "creditsCatTitle": {
+                "english": "🏆 Credits",
+                "portugues": "🏆 Créditos"
+            },
+            "creditsCatDesc": {
+                "english": "This was all I had to offer as a Discord Bot for now, but I'm always looking to improve myself and learn new things. If you have any suggestions, feel free to join my support server and share your ideas with me! 🤗\n\nI also have some useful links:\nCheck out my [Github](https://github.com/tockawaffle/SynthAi-Bot) page! There you can create Issues or new PRs to improve me!\nHere you can find my [Open-Source License](https://github.com/tockawaffle/SynthAi-Bot/blob/main/LICENSE)\nHere's the link for my [Support Server](https://discord.gg/PtnZGGt8DD)\n[Here](https://discord.com/oauth2/authorize?client_id=1096096564264579133&scope=bot&permissions=536840858736) you can add me to your Discord server",
+                "portugues": "Isto é tudo o que tenho para oferecer como um Bot do Discord por enquanto, mas estou sempre procurando melhorar a mim mesmo e aprender coisas novas. Se você tiver alguma sugestão, sinta-se à vontade para se juntar ao meu servidor de suporte e compartilhar suas ideias comigo! 🤗\n\nTambém tenho alguns links úteis:\nConfira minha página no [Github](https://github.com/tockawaffle/SynthAi-Bot)! Lá você pode criar issues ou novos PRs para me ajudar a melhorar!\nAqui você pode encontrar minha [licença de código aberto](https://github.com/tockawaffle/SynthAi-Bot/blob/main/LICENSE).\nAqui está o link para meu [servidor de suporte](https://discord.gg/PtnZGGt8DD).\n[Aqui](https://discord.com/oauth2/authorize?client_id=1096096564264579133&scope=bot&permissions=536840858736) você pode me adicionar ao seu servidor do Discord."
+            },
+            "Main Page": {
+                "english": "Main Page",
+                "portugues": "Página Principal"
+            },
+            "main pageDescription": {
+                "english": "Shows the main page of the help menu.",
+                "portugues": "Mostra a página principal do menu de ajuda."
             }
         }
     }
