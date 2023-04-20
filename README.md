@@ -46,7 +46,7 @@ GPT-3.5 is a state-of-the-art natural language processing model developed by Ope
 
 <h3 align="center"> Roadmap 🚀</h3>
 
-- [ ] Creation of a token quota (These APIs aren't free, you know?)
+- [X] Creation of a token quota (These APIs aren't free, you know?)
 - [ ] Integration with [Whisper ASR](https://openai.com/research/whisper) for voice-based interactions
 - [X] Integration with Bing Chat for more robust chatbot functionality
 - [ ] Integration with [Eleven Labs](https://beta.elevenlabs.io/) for personalized voice interfaces
