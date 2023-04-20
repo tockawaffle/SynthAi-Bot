@@ -11,7 +11,7 @@ Synth Bot is a versatile Discord bot powered by GPT-3.5 API that can assist you 
 
 <h3 align="center"> Features 🗒️ </h3>
 
-🤖 AI-Powered: Synth Bot is powered by the state-of-the-art GPT-3.5 API, which ensures high accuracy and reliability.
+🤖 AI-Powered: Synth Bot is powered mainly by the state-of-the-art OpenAi API, which ensures high accuracy and reliability.
 
 🗣️ Chatting: With the chatting API, Synth Bot can converse with you on a wide range of topics and help you pass the time.
 
