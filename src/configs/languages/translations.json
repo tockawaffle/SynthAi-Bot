@@ -2,9 +2,13 @@
     "languages": ["english", "portugues"],
     "traduzido": {
         "defaults": {
-            "noPerms": {
+            "noPermsUser": {
                 "english": "You do not have the required permission to use this command. The necessary permission is: %ss",
-                "portugues": "Você não possui permissão para utilizar este comando. A permissão necessária é: %s"
+                "portugues": "Você não possui permissão para utilizar este comando. A permissão necessária é: %ss"
+            },
+            "noPermsBot": {
+                "english": "I do not have the required permission to complete this command. You might want to check with the admins of this server to give me the needed permissions.\nThe necessary permission is: %ss",
+                "portugues": "Eu não possuo permissões suficientes para completar este comando. Você deveria pedir aos administradores deste servidor para me darem as permissões necessárias.\nA permissão necessária é: %ss"
             },
             "madeBy": {
                 "english": "Made by тоска (тоска#0001) with 🖤",
@@ -22,83 +26,31 @@
                 "english": "Seems like you are not in my database, did you opted out from using me? If not, please open an issue on my GitHub repository.",
                 "portugues": "Parece que você não está no meu banco de dados, você optou por não usar-me? Se não, abra um issue no meu repositório do GitHub."
             },
-            "tokenCountLessThan": {
-                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %s tokens.\nBut you can always use Bing!",
-                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %s tokens.\nPorém você pode sempre utilizar o Bing!"
+            "NaG": {
+                "english": "This command was not evoked in a guild, please try again in a guild.",
+                "portugues": "Este comando não foi invocado em um servidor, tente novamente em um servidor."
+            },
+            "error": {
+                "english": "An error has occurred, please try again later.",
+                "portugues": "Ocorreu um erro, tente novamente mais tarde."
+            },
+            "insufficientTier": {
+                "english": "You do not have the required tier to use this command. The necessary tier is: %t",
+                "portugues": "Você não possui o tier necessário para utilizar este comando. O tier necessário é: %t"
             }
         },
-        "config": {
-            "invalidCategory": {
-                "english": "%s is an invalid category. Try again.",
-                "portugues": "Categoria %s inválida. Tente novamente."
+        "tokens": {
+            "gptNET": {
+                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %t tokens.\nBut you can always use Bing!",
+                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %t tokens.\nPorém você pode sempre utilizar o Bing!"
             },
-            "gptCategorySet": {
-                "english": "ChatGPT Category set to: %s",
-                "portugues": "Categoria do ChatGPT definida para: %s"
+            "whisperNET": {
+                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %t tokens.",
+                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %t tokens."
             },
-            "invalidLang": {
-                "english": "%s is an invalid language. Try again.",
-                "portugues": "Idioma %s é inválido. Tente novamente."
-            },
-            "langTitle": {
-                "english": "✅ Language Set!",
-                "portugues": "✅ Idioma Configurado!"
-            },
-            "langDescription": {
-                "english": "Language set to: %s",
-                "portugues": "Idioma definido para: %s"
-            },
-            "missingServer": {
-                "english": "This server doesn't exist on my database, something might've gone wrong or I was offline when I was added to this server. Please, remove me and add me again.",
-                "portugues": "Este servidor não existe no meu banco de dados, algo pode ter dado errado ou eu estava offline quando fui adicionado a este servidor. Por favor, remova-me e adicione-me novamente."
-            },
-            "bingCategorySet": {
-                "english": "Bing Category set to: %s",
-                "portugues": "Categoria do Bing definida para: %s"
-            }
-        },
-        "startChat": {
-            "categoryNotSet": {
-                "english": "The category for the chat is not set, ask an admin to set it up using the 'config' command. Or, you can start a DM chat with me.",
-                "portugues": "A categoria do chat não está definida, peça a um administrador para configurá-la usando o comando 'config'. Ou então, você pode iniciar um PV comigo."
-            },
-            "noUserDb": {
-                "english": "You don't have a user database, you might've opted-out from this bot, opt-in to use me.",
-                "portugues": "Você não tem um banco de dados de usuário, você pode ter optado por não usar este bot, opte por usar-me."
-            },
-            "chatStarted": {
-                "english": "Chat started at %s, go there to chat with me!",
-                "portugues": "Chat iniciado com %s, vá até aquele chat para conversar comigo!"
-            },
-            "missingChannel": {
-                "english": "I couldn't find the channel that was assigned to you, I'm resetting it, try again.",
-                "portugues": "Não consegui encontrar o canal que foi atribuído a você, estou redefinindo-o, tente novamente."
-            }
-        },
-        "opt": {
-            "in": {
-                "english": "You've opted-in to use this bot, you can now use all of its features.",
-                "portugues": "Você optou por usar este bot, agora você pode usar todos os seus recursos."
-            },
-            "unchangedIn": {
-                "english": "You've already opted-in to use this bot, you can now use all of its features.",
-                "portugues": "Você já optou por usar este bot, agora você pode usar todos os seus recursos."
-            },
-            "changedOut": {
-                "english": "You've changed your mind and opted-in to use this bot, you can now use all of its features.",
-                "portugues": "Você mudou de ideia e optou por usar este bot, agora você pode usar todos os seus recursos."
-            },
-            "out": {
-                "english": "You've opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
-                "portugues": "Você optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
-            },
-            "unchangedOut": {
-                "english": "You've already opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
-                "portugues": "Você já optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
-            },
-            "changedIn": {
-                "english": "You've changed your mind and opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
-                "portugues": "Você mudou de ideia e optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            "dalleNET": {
+                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %t tokens.\nThese are the tokens you have left: %r.",
+                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %t tokens. \nEstes são os tokens que você tem restante: %r."
             }
         },
         "help": {
@@ -111,8 +63,8 @@
                 "portugues": "E aí, galera! Eu sou o Synth Bot! 👋 Tô aqui para melhorar nossas interações no Discord e deixar nossas conversas mais divertidas! 🎆 Pode falar comigo à vontade, tô sempre disponível para bater um papo maneiro! Ah, e o legal é que você pode conversar comigo de um jeito fácil e natural. Tem vários jeitos de interagir comigo: através de comandos específicos, em um chat criado por um comando ou até mesmo direto na nossa conversa privada.\n\nEu sou feito para ser super intuitivo e fácil de usar, então não precisa se preocupar se você não manja muito de tecnologia. Tô aqui pra ajudar e responder às suas perguntas, e sempre tô pronto pra participar de conversas iradas no Discord! Então vamos conversar logo e deixar a nossa experiência no Discord ainda mais emocionante! 🚀"
             },
             "helpFooter": {
-                "english": "Made by тоска (%botOwner%) with 🖤",
-                "portugues": "Feito por тоска (%botOwner%) com 🖤"
+                "english": "Made by %botOwner% with 🖤",
+                "portugues": "Feito por %botOwner% com 🖤"
             },
             "helpPlaceholder": {
                 "english": "Choose one!",
@@ -170,6 +122,137 @@
                 "english": "Shows the main page of the help menu.",
                 "portugues": "Mostra a página principal do menu de ajuda."
             }
+        },
+        "config": {
+            "invalidCategory": {
+                "english": "%s is an invalid category. Try again.",
+                "portugues": "Categoria %s inválida. Tente novamente."
+            },
+            "gptCategorySet": {
+                "english": "ChatGPT Category set to: %s",
+                "portugues": "Categoria do ChatGPT definida para: %s"
+            },
+            "invalidLang": {
+                "english": "%s is an invalid language. Try again.",
+                "portugues": "Idioma %s é inválido. Tente novamente."
+            },
+            "langTitle": {
+                "english": "✅ Language Set!",
+                "portugues": "✅ Idioma Configurado!"
+            },
+            "langDescription": {
+                "english": "Language set to: %s",
+                "portugues": "Idioma definido para: %s"
+            },
+            "missingServer": {
+                "english": "This server doesn't exist on my database, something might've gone wrong or I was offline when I was added to this server. Please, remove me and add me again.",
+                "portugues": "Este servidor não existe no meu banco de dados, algo pode ter dado errado ou eu estava offline quando fui adicionado a este servidor. Por favor, remova-me e adicione-me novamente."
+            },
+            "bingCategorySet": {
+                "english": "Bing Category set to: %s",
+                "portugues": "Categoria do Bing definida para: %s"
+            },
+            "whisperCategorySet": {
+                "english": "Whisper Category set to: %s",
+                "portugues": "Categoria do Whisper definida para: %s"
+            }
+        },
+        "startChat": {
+            "categoryNotSet": {
+                "english": "The category for the chat is not set, ask an admin to set it up using the 'config' command. Or, you can start a DM chat with me.",
+                "portugues": "A categoria do chat não está definida, peça a um administrador para configurá-la usando o comando 'config'. Ou então, você pode iniciar um PV comigo."
+            },
+            "noUserDb": {
+                "english": "You don't have a user database, you might've opted-out from this bot, opt-in to use me.",
+                "portugues": "Você não tem um banco de dados de usuário, você pode ter optado por não usar este bot, opte por usar-me."
+            },
+            "chatStarted": {
+                "english": "Chat started at %s, go there to chat with me!",
+                "portugues": "Chat iniciado com %s, vá até aquele chat para conversar comigo!"
+            },
+            "missingChannel": {
+                "english": "I couldn't find the channel that was assigned to you, I'm resetting it, try again.",
+                "portugues": "Não consegui encontrar o canal que foi atribuído a você, estou redefinindo-o, tente novamente."
+            }
+        },
+        "opt": {
+            "in": {
+                "english": "You've opted-in to use this bot, you can now use all of its features.",
+                "portugues": "Você optou por usar este bot, agora você pode usar todos os seus recursos."
+            },
+            "unchangedIn": {
+                "english": "You've already opted-in to use this bot, you can now use all of its features.",
+                "portugues": "Você já optou por usar este bot, agora você pode usar todos os seus recursos."
+            },
+            "changedOut": {
+                "english": "You've changed your mind and opted-in to use this bot, you can now use all of its features.",
+                "portugues": "Você mudou de ideia e optou por usar este bot, agora você pode usar todos os seus recursos."
+            },
+            "out": {
+                "english": "You've opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
+                "portugues": "Você optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            },
+            "unchangedOut": {
+                "english": "You've already opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
+                "portugues": "Você já optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            },
+            "changedIn": {
+                "english": "You've changed your mind and opted-out from using this bot, you can't use any of its features anymore. The only thing I will remember about you is your ID: %s.",
+                "portugues": "Você mudou de ideia e optou por não usar este bot, você não pode mais usar nenhum de seus recursos. A única coisa que eu vou lembrar sobre você é seu ID: %s."
+            }
+        },
+        "whisper": {
+            "noFileOrUrl": {
+                "english": "You need to provide a file or a URL.",
+                "portugues": "Você precisa fornecer um arquivo ou uma URL."
+            },
+            "invalidUrl": {
+                "english": "The URL you provided is invalid.",
+                "portugues": "A URL que você forneceu é inválida."
+            },
+            "error": {
+                "english": "An error occurred while trying to download the file: %s",
+                "portugues": "Ocorreu um erro ao tentar baixar o arquivo: %s"
+            },
+            "notImplemented": {
+                "english": "This function is yet to be implemented, sorry. You can use the URL option instead.\n",
+                "portugues": "Esta função ainda não foi implementada, desculpe. Você pode usar a opção de URL em vez disso."
+            },
+            "successUrl": {
+                "english": "The file was transcribed successfully, but do expect some errors.",
+                "portugues": "O arquivo foi transcrito com sucesso, mas tenha expectativa de erros."
+            },
+            "successTranslation": {
+                "english": "The file was translated successfully, but do expect some errors.\nThis command needs testing, so if you think that you can provide some feedback, please do so. You can contact the devs either on my Github page or my support server.",
+                "portugues": "O arquivo foi traduzido com sucesso, mas tenha expectativa de erros.\nEste comando precisa de testes, então se você acha que pode fornecer algum feedback, por favor, faça-o. Você pode entrar em contato com os desenvolvedores na minha página do Github ou no meu servidor de suporte."
+            },
+            "helpDescTranscribe": {
+                "english": "These are the following arguments you can use with this command:\nUrl: ```You must provide an URL for a Youtube video that you want to transcribe.```\nPrompting: ```An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.```\nLanguage: ```The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency.```",
+                "portugues": "Estes são os seguintes argumentos que você pode usar com este comando:\nUrl: ```Você deve fornecer uma URL para um vídeo do Youtube que você deseja transcrever```Prompting: ```Um texto opcional para guiar o estilo do modelo ou continuar um segmento de áudio anterior. O prompt deve estar em inglês.```\nIdioma: ```O idioma do áudio de entrada. Fornecer o idioma de entrada no formato ISO-639-1 melhorará a precisão e a latência.```"
+            },
+            "helpDescTranslate": {
+                "english": "This command works by translating audios to English only.\n\nThese are the following arguments you can use with this command:\nUrl: ```You must provide an URL for a Youtube video that you want to translate to english.```\nPrompting: ```An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.```",
+                "portugues": "Este comando traduz apenas aúdios para o inglês.\n\nEstes são os seguintes argumentos que você pode usar com este comando:\nUrl: ```Você deve fornecer uma URL para um vídeo do Youtube que você deseja traduzir para o inglês```Prompting: ```Um texto opcional para guiar o estilo do modelo ou continuar um segmento de áudio anterior. O prompt deve estar em inglês.```"
+            }
+        },
+        "createMe": {
+            "alreadyHasCustomPersonality": {
+                "english": "You already have a custom personality, you can't create another one.\nDelete your current custom personality to create a new one.",
+                "portugues": "Você já tem uma personalidade personalizada, você não pode criar outra.\nExclua sua personalidade personalizada atual para criar uma nova."
+            },
+            "openaiUsagePolicy": {
+                "english": "Before creating this personality, you must read and agree to the OpenAI Usage Policy.\nThis function is highly cost-intensive, and to maintain control, you will be limited to a total of 1 custom personality.\nPlease note that this personality will not be fully customizable, as it will include a system prompt instructing the AI not to infringe on OpenAI's policies and Discord's policies.\n\nTo review the OpenAI Usage Policy, please visit [OpenAi's Website](https://openai.com/policies/usage-policies).\nIf you agree to the policy, please click the button below. If you do not agree, please disregard this message.\n\nThank you for your understanding and cooperation.\n%bo.\n\nCustom Personality: ``` %p ```\nType: ``` %t ```\nId: ``` %i ```",
+                "portugues": "Antes de criar esta personalidade, você deve ler e concordar com a Política de Uso da OpenAI.\nEsta função é altamente intensiva em custos e, para manter o controle, você será limitado a um total de 1 personalidade personalizada.\nObserve que esta personalidade não será totalmente personalizável, pois incluirá um prompt do sistema instruindo a IA a não infringir as políticas da OpenAI e as políticas do Discord.\n\nPara revisar a Política de Uso da OpenAI, visite [o site da OpenAi](https://openai.com/policies/usage-policies).\nSe você concorda com a política, clique no botão abaixo. Se você não concorda, ignore esta mensagem.\n\nObrigado pela sua compreensão e cooperação.\n%bo.\n\nPersonalidade Personalizada: ``` %p ```\nTipo: ``` %t ```\nId: %i"
+            },
+            "openaiUsagePolicyTitle": {
+                "english": "Usage Policy",
+                "portugues": "Política de Uso"
+            },
+            "openaiUsagePolicyButton": {
+                "english": "I agree to the OpenAI Usage Policy",
+                "portugues": "Eu concordo com a Política de Uso da OpenAI"
+            }
+
         }
     }
 }

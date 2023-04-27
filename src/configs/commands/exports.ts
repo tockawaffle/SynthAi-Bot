@@ -14,26 +14,34 @@ import Credits from "./help/Credits";
 import Main from "./help/Main";
 import AI from "./help/AI";
 
-export {
-    gptCategory,
-    bingCategory,
-    options,
-    language,
-}
+import urlHandler from "./ais/whisper/transcribeUrlHandler";
+import translateUrlHandler from "./ais/whisper/translateUrlHandler";
+import helpHandler from "./ais/whisper/helpHandler";
+import whisperOptions from "./ais/whisper/options";
 
-export {
-    GPT,
-    Bing
-}
+import dalleOptions from "./ais/image/options";
+import dalleGenerator from "./ais/image/dalle/commandFunc"
 
-export {
-    optIn,
-    optOut
-}
+import askGpt from "./ais/ask/gpt3";
+import askBing from "./ais/ask/bing";
 
-export {
-    Configuration,
-    Credits,
-    Main,
-    AI,
-}
+//Config Command
+export { gptCategory, bingCategory, options, language };
+
+//Start-chat Command
+export { GPT, Bing };
+
+//Opt Command
+export { optIn, optOut };
+
+//Help Command
+export { Configuration, Credits, Main, AI };
+
+//Whisper
+export { whisperOptions, urlHandler, helpHandler, translateUrlHandler };
+
+//Dall-e
+export { dalleOptions, dalleGenerator };
+
+//Ask
+export { askGpt, askBing };

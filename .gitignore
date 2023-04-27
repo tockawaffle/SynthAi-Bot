@@ -125,3 +125,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Everything inside dump folder, excluding the placeholder
+dump/**/*.mp3
+dump/**/*.txt

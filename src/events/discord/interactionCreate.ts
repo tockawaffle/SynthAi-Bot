@@ -1,5 +1,10 @@
 import { Client, Events, Interaction } from "discord.js";
-import { AI, Configuration, Credits, Main } from "../../configs/commands/exports";
+import {
+    AI,
+    Configuration,
+    Credits,
+    Main,
+} from "../../configs/commands/exports";
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -25,7 +30,7 @@ module.exports = {
                             break;
                         }
                         case "Credits": {
-                            await Credits(interaction)
+                            await Credits(interaction);
                             break;
                         }
                         case "Main Page": {

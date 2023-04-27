@@ -4,9 +4,13 @@ import GptChannels from "../../configs/database/functions/GptChannels";
 import BingChannels from "../../configs/database/functions/BingChannel";
 // import updateFollowUp from "../../configs/ais/bing/updateFollowUp";
 
+import moderate from "../__dev/moderation";
+
 import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 
-import tokenHandler from "../../configs/ais/handlers/tokenHandler";
+import tokenHandler from "../../configs/ais/handlers/gptTokenHandler";
+import handleMessageMemory from "../../configs/ais/handlers/handleMessageMemory";
+import moment from "moment";
 
 module.exports = {
     name: Events.MessageCreate,
@@ -14,11 +18,7 @@ module.exports = {
     async execute(message: Message, client: Client) {
         const { author, channel, guild } = message;
 
-        if (await handleOptedOut(author)) {
-            return await message.reply(
-                "You opted out of this bot, you cannot use any features I have avaiable."
-            );
-        }
+        const hasOptedOut = await handleOptedOut(author);
 
         if (author.bot) return;
         if (!guild) return;
@@ -29,53 +29,25 @@ module.exports = {
         const BingShouldReply = BingChannels(author, thisChn);
 
         if (GptShouldReply) {
+
             if (message.content.length <= 0) return;
             message.channel.sendTyping();
+
+            if(hasOptedOut) return await message.reply(
+                "You opted out of this bot, you cannot use any features I have avaiable."
+            );
 
             const token = await tokenHandler(message.content, message);
             if (!token) return;
 
-            const moderation = (
-                await client.gpt.createModeration({
-                    model: "text-moderation-latest",
-                    input: message.content,
-                })
-            ).data.results[0];
+            const moderation = await moderate(message);
+            if (moderation) return;
 
-            if (moderation.flagged) {
-                const flags = moderation.categories as {
-                    sexual: boolean;
-                    hate: boolean;
-                    violence: boolean;
-                    "self-harm": boolean;
-                    "sexual/minors": boolean;
-                    "hate/threatening": boolean;
-                    "violence/graphic": boolean;
-                };
-
-                const flagsArray = Object.entries(flags).filter(
-                    (flag) => flag[1] === true
-                );
-
-                const flagsString = flagsArray
-                    .map((flag) => flag[0])
-                    .join(", ");
-
-                return message.channel.send({
-                    content: `${client.translate(
-                        author,
-                        "defaults",
-                        "moderationFlagged"
-                    )} ${flagsString}.`,
-                    reply: {
-                        messageReference: message.id,
-                    },
-                });
-            }
+            const memoryAmount = await handleMessageMemory(author);
 
             const messages = await (
                 message.channel as TextChannel
-            ).messages.fetch({ limit: 25 });
+            ).messages.fetch({ limit: memoryAmount });
             const messagesArray = messages.filter((m) => {
                 if (m.author.id === author.id) {
                     m.content = `User: ${m.content}`;
@@ -86,7 +58,6 @@ module.exports = {
                     m.content = `Bot: ${m.content}`;
                     return m.content;
                 }
-
                 return;
             });
 
@@ -94,7 +65,7 @@ module.exports = {
                 .map((m) => m.content)
                 .reverse();
 
-            const gpt = await client.gpt.createChatCompletion({
+            const gpt = await client.openai.createChatCompletion({
                 model: "gpt-3.5-turbo",
                 messages: [
                     {
@@ -103,21 +74,15 @@ module.exports = {
                     },
                     {
                         role: "system",
-                        content: `You are chatting with ${
-                            author.username
-                        }, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
-                            client.user!.username
-                        }, created and developed by ${
-                            client.users.cache.get("876578406144290866")!
-                                .username
-                        }.`,
+                        content: client.gptSystem(author, client, "guild"),
                     },
                     {
                         role: "assistant",
                         content: messagesArrayContent.join("\n"),
                     },
                 ],
-                max_tokens: 250,
+                max_tokens: 512,
+                user: author.id,
             });
 
             await message.channel.send({
@@ -130,43 +95,12 @@ module.exports = {
             if (message.content.length <= 0) return;
             message.channel.sendTyping();
 
-            const moderation = (
-                await client.gpt.createModeration({
-                    model: "text-moderation-latest",
-                    input: message.content,
-                })
-            ).data.results[0];
+            if(hasOptedOut) return await message.reply(
+                "You opted out of this bot, you cannot use any features I have avaiable."
+            );
 
-            if (moderation.flagged) {
-                const flags = moderation.categories as {
-                    sexual: boolean;
-                    hate: boolean;
-                    violence: boolean;
-                    "self-harm": boolean;
-                    "sexual/minors": boolean;
-                    "hate/threatening": boolean;
-                    "violence/graphic": boolean;
-                };
-
-                const flagsArray = Object.entries(flags).filter(
-                    (flag) => flag[1] === true
-                );
-
-                const flagsString = flagsArray
-                    .map((flag) => flag[0])
-                    .join(", ");
-
-                return message.channel.send({
-                    content: `${client.translate(
-                        author,
-                        "defaults",
-                        "moderationFlagged"
-                    )} ${flagsString}.`,
-                    reply: {
-                        messageReference: message.id,
-                    },
-                });
-            }
+            const moderation = await moderate(message);
+            if (moderation) return;
 
             const bing = await client.bing.sendMessage(
                 message.content

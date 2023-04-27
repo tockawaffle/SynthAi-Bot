@@ -24,6 +24,8 @@ export default async (interaction: CommandInteraction) => {
         );
 
         await userSchema.deleteOne({ _id: user.id });
+        
+        await client.loadUser(client)
 
         return await interaction.reply({
             content: client

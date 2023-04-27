@@ -1,11 +1,11 @@
 import { ChatMessage } from "bing-chat";
 
-import userSchema from "../../database/models/userSchema";
+import userSchema from "../../../database/models/userSchema";
 import { Client, User } from "discord.js";
 import {
     loadChannels,
     setUserChannel,
-} from "../../database/functions/BingChannel";
+} from "../../../database/functions/BingChannel";
 
 export default async (
     followUp: ChatMessage,

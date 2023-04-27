@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import { Configuration } from "openai/dist/configuration";
 import { OpenAIApi } from "openai/dist/api";
-import userSchema from "../../database/models/userSchema";
+import userSchema from "../../../database/models/userSchema";
 
 export default async function (apiKey: string, client: Client) {
     const conf = new Configuration({
@@ -10,7 +10,7 @@ export default async function (apiKey: string, client: Client) {
 
     const chatCompletion = new OpenAIApi(conf);
 
-    client.gpt = chatCompletion;
+    client.openai = chatCompletion;
 }
 
 export async function defineUsers(client: Client) {
@@ -19,7 +19,5 @@ export async function defineUsers(client: Client) {
 
     for (const foundUser of foundUsers) {
         client.users.cache.get(foundUser._id)!.premium = foundUser.premium;
-        client.users.cache.get(foundUser._id)!.gptTokensAvailable =
-            foundUser.artificialInteligence.chatGPT.avaiableUsage;
     }
 }

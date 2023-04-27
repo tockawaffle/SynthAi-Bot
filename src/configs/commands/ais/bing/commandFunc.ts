@@ -10,6 +10,8 @@ import {
     setUserChannel,
 } from "../../../database/functions/BingChannel";
 
+import moderate from "../../../../events/__dev/moderation";
+
 export default async (
     interaction: CommandInteraction,
     newChat: any,
@@ -31,38 +33,8 @@ export default async (
 
     const topic = interaction.options.get("subject", true).value as string;
 
-    const moderation = (
-        await client.gpt.createModeration({
-            model: "text-moderation-latest",
-            input: topic,
-        })
-    ).data.results[0];
-
-    if (moderation.flagged) {
-        const flags = moderation.categories as {
-            sexual: boolean;
-            hate: boolean;
-            violence: boolean;
-            "self-harm": boolean;
-            "sexual/minors": boolean;
-            "hate/threatening": boolean;
-            "violence/graphic": boolean;
-        };
-
-        const flagsArray = Object.entries(flags).filter(
-            (flag) => flag[1] === true
-        );
-
-        const flagsString = flagsArray.map((flag) => flag[0]).join(", ");
-
-        return interaction.reply({
-            content: `${client.translate(
-                user,
-                "defaults",
-                "moderationFlagged"
-            )} ${flagsString}.`,
-        });
-    }
+    const moderation = await moderate(interaction, topic);
+    if (moderation) return;
 
     let channelName: string = "";
 
@@ -128,7 +100,7 @@ export default async (
         await interaction.editReply({
             content: client
                 .translate(user, "startChat", "chatStarted")
-                .replace("%s", newThread),
+                .replace("%s", `${newThread}`),
         });
 
         return await newThread.send({
@@ -189,7 +161,7 @@ export default async (
         await interaction.editReply({
             content: client
                 .translate(user, "startChat", "chatStarted")
-                .replace("%s", newThread),
+                .replace("%s", `${newThread}`),
         });
 
         return await newThread.send({

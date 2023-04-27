@@ -3,26 +3,35 @@ export default interface userSchema extends Document {
     createdAt: Date;
     accountSettings: {
         language: string;
-        customBackgroundName?: string;
-        customMarriageBackgroundName?: string;
     };
     artificialInteligence: {
         chatGPT: {
             avaiableUsage: number;
+            customPersonality?: {
+                id: string;
+                personality: string;
+                type: "DM" | "Guild";
+            };
         };
-        whisperLabs: {
+        whisper: {
             avaiableUsage: number;
         };
+        dalle: {
+            avaiable1024: number;
+            avaiable512: number;
+            avaiable256: number;
+        };
     };
-    premium: {
-        free: boolean;
-        freemium: boolean;
-        premium: boolean;
-        premiumPlus: boolean;
-        supporter: boolean;
-        supporterPlus: boolean;
-        unlimited: boolean;
-    };
+    premium:
+        | "free"
+        | "freemium"
+        | "premium"
+        | "premiumPlus"
+        | "supporter"
+        | "supporterPlus"
+        | "tester"
+        | "unlimited";
+    premiumUntil?: Date;
     channels?: {
         gptChat: {
             chat: [
@@ -41,7 +50,7 @@ export default interface userSchema extends Document {
                     channelId: string;
                     threadId: string;
                     model: string;
-                    followUp: any
+                    followUp: any;
                 }
             ];
         };

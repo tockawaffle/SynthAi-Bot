@@ -1,5 +1,11 @@
 import { ChannelType, Client, DMChannel, Events, Message } from "discord.js";
-import tokenHandler from "../../configs/ais/handlers/tokenHandler";
+
+import moderate from "../__dev/moderation";
+
+import tokenHandler from "../../configs/ais/handlers/gptTokenHandler";
+import handleMessageMemory from "../../configs/ais/handlers/handleMessageMemory";
+import handleSpecific from "../__dev/handleSpecific";
+import optedOut from "../../configs/database/models/optedOut";
 
 module.exports = {
     name: Events.MessageCreate,
@@ -9,50 +15,29 @@ module.exports = {
         if (author.bot) return;
         if (channel.type !== ChannelType.DM) return;
 
-        await message.channel.sendTyping();
-
-        const token = await tokenHandler(message.content, message);
-        console.log(token)
-        if(!token) return;
-
-        const moderation = (
-            await client.gpt.createModeration({
-                model: "text-moderation-latest",
-                input: message.content,
-            })
-        ).data.results[0];
-
-        if (moderation.flagged) {
-            const flags = moderation.categories as {
-                sexual: boolean;
-                hate: boolean;
-                violence: boolean;
-                "self-harm": boolean;
-                "sexual/minors": boolean;
-                "hate/threatening": boolean;
-                "violence/graphic": boolean;
-            };
-
-            const flagsArray = Object.entries(flags).filter(
-                (flag) => flag[1] === true
-            );
-
-            const flagsString = flagsArray.map((flag) => flag[0]).join(", ");
-
-            return message.channel.send({
-                content: `${client.translate(
-                    author,
-                    "defaults",
-                    "moderationFlagged"
-                )} ${flagsString}.`,
-                reply: {
-                    messageReference: message.id,
-                },
+        const isOptedOut = await optedOut.findOne({ _id: author.id });
+        if (isOptedOut) {
+            return await message.reply({
+                content:
+                    "You have opted out of the bot. You cannot use any features I have until you opt back in.",
             });
         }
 
+        await message.channel.sendTyping();
+
+        const devCommandsHandler = await handleSpecific(author, message);
+        if (devCommandsHandler) return;
+
+        const token = await tokenHandler(message.content, message);
+        if (!token) return;
+
+        const moderation = await moderate(message);
+        if (moderation) return;
+
+        const memoryAmount = await handleMessageMemory(author);
+
         const messages = await (message.channel as DMChannel).messages.fetch({
-            limit: 25,
+            limit: memoryAmount,
         });
         const messagesArray = messages.filter((m) => {
             if (m.author.id === author.id) {
@@ -72,7 +57,7 @@ module.exports = {
             .map((m) => m.content)
             .reverse();
 
-        const gpt = await client.gpt.createChatCompletion({
+        const gpt = await client.openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [
                 {
@@ -81,18 +66,15 @@ module.exports = {
                 },
                 {
                     role: "system",
-                    content: `You are chatting with ${
-                        author.tag
-                    }, his unique id is ${author.id}, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
-                        client.user!.username
-                    }, you were created and developed by ${client.users.cache.get("876578406144290866")!.tag}, his unique id is 876578406144290866, when talking to him, you might address him as "creator" or "developer".`,
+                    content: client.gptSystem(author, client, "dm"),
                 },
                 {
                     role: "assistant",
                     content: messagesArrayContent.join("\n"),
                 },
             ],
-            max_tokens: 250,
+            max_tokens: 512,
+            user: author.id,
         });
 
         await message.channel.send({

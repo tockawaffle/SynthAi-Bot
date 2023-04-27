@@ -5,7 +5,7 @@ import {
     options,
     gptCategory,
     language,
-    bingCategory,
+    bingCategory
 } from "../../configs/commands/exports";
 import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 

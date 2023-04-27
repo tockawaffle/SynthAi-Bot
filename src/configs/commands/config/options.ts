@@ -39,7 +39,7 @@ export default [
                         required: true,
                     },
                 ],
-            },
+            }
         ],
     },
     {

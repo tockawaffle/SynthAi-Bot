@@ -9,7 +9,10 @@ import {
     loadChannels,
     setUserChannel,
 } from "../../../database/functions/GptChannels";
-import tokenHandler from "../../../ais/handlers/tokenHandler";
+import tokenHandler from "../../../ais/handlers/gptTokenHandler";
+
+import moderate from "../../../../events/__dev/moderation";
+import moment from "moment";
 
 export default async (
     interaction: CommandInteraction,
@@ -32,42 +35,11 @@ export default async (
 
     const topic = interaction.options.get("subject", true).value as string;
 
-    const token = await tokenHandler(topic, interaction)
-    if(!token) return;
+    const token = await tokenHandler(topic, interaction);
+    if (!token) return;
 
-    const moderation = (
-        await client.gpt.createModeration({
-            model: "text-moderation-latest",
-            input: topic,
-        })
-    ).data.results[0];
-
-    if (moderation.flagged) {
-        const flags = moderation.categories as {
-            sexual: boolean;
-            hate: boolean;
-            violence: boolean;
-            "self-harm": boolean;
-            "sexual/minors": boolean;
-            "hate/threatening": boolean;
-            "violence/graphic": boolean;
-        };
-
-        const flagsArray = Object.entries(flags).filter(
-            (flag) => flag[1] === true
-        );
-
-        const flagsString = flagsArray.map((flag) => flag[0]).join(", ");
-
-        return interaction.reply({
-            content: `${client.translate(
-                user,
-                "defaults",
-                "moderationFlagged"
-            )} ${flagsString}.`,
-            ephemeral: true,
-        });
-    }
+    const moderation = await moderate(interaction, topic);
+    if (moderation) return;
 
     let channelName: string = "";
 
@@ -108,7 +80,7 @@ export default async (
 
         await interaction.deferReply({ ephemeral: true });
 
-        const gpt = await client.gpt.createChatCompletion({
+        const gpt = await client.openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [
                 {
@@ -117,14 +89,11 @@ export default async (
                 },
                 {
                     role: "system",
-                    content: `You are chatting with ${
-                        user.username
-                    }, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
-                        client.user!.username
-                    }, you were created and developed by ${client.users.cache.get("876578406144290866")!.username}.`,
+                    content: client.gptSystem(user, client, "guild"),
                 },
             ],
-            max_tokens: 250,
+            max_tokens: 512,
+            user: user.id,
         });
 
         const data = {
@@ -149,7 +118,7 @@ export default async (
         await interaction.editReply({
             content: client
                 .translate(user, "startChat", "chatStarted")
-                .replace("%s", newThread),
+                .replace("%s", `${newThread}`),
         });
 
         return await newThread.send({
@@ -185,7 +154,7 @@ export default async (
             reason: `Chat with ${user.username}`,
         });
 
-        const gpt = await client.gpt.createChatCompletion({
+        const gpt = await client.openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [
                 {
@@ -194,14 +163,11 @@ export default async (
                 },
                 {
                     role: "system",
-                    content: `You are chatting with ${
-                        user.username
-                    }, answer the user precisely and in their language input. Do not use any prefixes at the start of messages. You are on Discord, integrated via your API. The bot's name is ${
-                        client.user!.username
-                    }, created by ${client.application!.owner}.`,
+                    content: client.gptSystem(user, client, "guild"),
                 },
             ],
-            max_tokens: 250,
+            max_tokens: 512,
+            user: user.id,
         });
 
         const data = {
@@ -226,7 +192,7 @@ export default async (
         await interaction.editReply({
             content: client
                 .translate(user, "startChat", "chatStarted")
-                .replace("%s", newThread),
+                .replace("%s", `${newThread}`),
         });
 
         return await newThread.send({

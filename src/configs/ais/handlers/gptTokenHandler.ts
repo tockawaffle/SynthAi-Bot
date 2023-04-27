@@ -13,14 +13,14 @@ export default async function tokenHandler(
     const tokenCountRounded =
         Math.round((tokenCount + Number.EPSILON) * 100) / 100;
 
-    let user: User
+    let user: User;
 
-    const {client} = interaction
+    const { client } = interaction;
 
-    if(interaction instanceof Message) {
-        user = interaction.author
+    if (interaction instanceof Message) {
+        user = interaction.author;
     } else {
-        user = interaction.user
+        user = interaction.user;
     }
 
     const getUserTokens = await userSchema.findOne({ _id: user.id });
@@ -28,18 +28,19 @@ export default async function tokenHandler(
         await interaction.reply(
             client.translate(user, "defaults", "missingDb")
         );
-        return false
+        return false;
     } else {
         const getTokens =
             getUserTokens.artificialInteligence.chatGPT.avaiableUsage;
         if (getTokens < tokenCountRounded) {
             await interaction.reply(
-                client.translate(user, "defaults", "tokenCountLessThan")
+                client
+                    .translate(user, "tokens", "gptNET")
+                    .replace("%s", getTokens.toString())
+                    .replace("%t", tokenCountRounded.toString())
             );
-            return false
+            return false;
         } else {
-            console.log(getTokens)
-            //update token count
             const updateTokens = await userSchema.findOneAndUpdate(
                 { _id: user.id },
                 {
@@ -54,7 +55,7 @@ export default async function tokenHandler(
                 await interaction.reply(
                     client.translate(user, "defaults", "missingDb")
                 );
-                return false
+                return false;
             } else {
                 return true;
             }

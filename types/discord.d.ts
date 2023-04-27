@@ -1,34 +1,34 @@
 import { ChatGPTAPI } from "chatgpt";
-import "discord.js";
-import { REST } from "discord.js";
-import Translator from "../src/configs/languages/lang";
-import { BingChat } from "bing-chat";
 import { OpenAIApi } from "openai";
+import charAi from "node_characterai";
+import { BingChat } from "bing-chat";
+import { REST } from "discord.js";
 import WOK from "@tockawa/wokcommands";
+import translate from "../src/configs/languages/lang";
+import "discord.js";
 
 declare module "discord.js" {
     export interface Client {
-        rest: REST;
-        gpt: OpenAIApi;
-        gptPersist: ChatGPTAPI;
-        bing: BingChat;
-        setLanguage: Translator["setUserLanguage"];
-        translate: Translator["translateText"];
-        loadUser: function;
         WOK: WOK;
+        rest: REST;
+        bing: BingChat;
+        openai: OpenAIApi;
+        charai: charAi;
+        gptSystem: (user: User, client: Client, type: "dm" | "guild" | "ask") => string;
+        loadUser: (client: Client) => Promise<void>;
+        setLanguage: (user: User, languages: string) => void;
+        translate: (user: User, commandName: string, textId: string) => string;
     }
     export interface User {
         lang: string;
-        gptTokensAvailable: number;
-        whisperLabsTokensAvailable: number;
-        premium: {
-            free: boolean;
-            freemium: boolean;
-            premium: boolean;
-            premiumPlus: boolean;
-            supporter: boolean;
-            supporterPlus: boolean;
-            unlimited: boolean;
-        };    
+        premium:
+            | "free"
+            | "freemium"
+            | "premium"
+            | "premiumPlus"
+            | "supporter"
+            | "supporterPlus"
+            | "tester"
+            | "unlimited";
     }
 }

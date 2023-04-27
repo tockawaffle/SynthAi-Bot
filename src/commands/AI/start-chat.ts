@@ -4,11 +4,15 @@ import {
     CommandInteraction,
     User,
     ApplicationCommandOptionType,
+    PermissionFlagsBits,
 } from "discord.js";
 
 import serverSchema from "../../configs/database/models/serverSchema";
 import userSchema from "../../configs/database/models/userSchema";
+
 import checkGuild from "../../configs/validators/commands/runtime/checkGuild";
+import checkPerms from "../../configs/validators/commands/runtime/checkPerms";
+import optedOut from "../../configs/database/models/optedOut";
 import { Bing, GPT } from "../../configs/commands/exports";
 
 export default {
@@ -66,87 +70,116 @@ export default {
         interaction: CommandInteraction;
         user: User;
     }) => {
-        if (checkGuild(interaction)) {
-            const getCategory = await serverSchema.findOne(
-                { _id: interaction.guild!.id },
-                { channels: { gptCategory: 1, bingCategory: 1 } }
-            );
+        const isOptedOut = await optedOut.findOne({ _id: "optedOut", ids: { $in: [user.id] } })
+        if (isOptedOut) {
+            return await interaction.reply({
+                content:
+                    "You have opted out of the bot. You cannot use any features I have until you opt back in.",
+                ephemeral: true,
+            });
+        }
 
-            const getChoice = interaction.options.get("model", true)
-                .value as string;
+        if (!checkGuild(interaction)) {
+            return await interaction.reply({
+                content: client.translate(user, "defaults", "NaG"),
+                ephemeral: true,
+            });
+        }
 
-                
-            switch (getChoice) {
-                case "gpt3": {
-                    const category = getCategory!.channels.gptCategory as
-                        | string
-                        | undefined;
-                    if (!category || category.length <= 0) {
-                        return await interaction.reply({
-                            content: client.translate(
-                                user,
-                                "startChat",
-                                "categoryNotSet"
-                            ),
-                            ephemeral: true,
-                        });
-                    }
+        const getCategory = await serverSchema.findOne(
+            { _id: interaction.guild!.id },
+            { channels: { gptCategory: 1, bingCategory: 1 } }
+        );
 
-                    const newChat = await userSchema.findOne(
-                        { _id: user.id },
-                        { channels: { gptChat: 1 } }
-                    );
+        const perms = await checkPerms(
+            interaction,
+            [
+                PermissionFlagsBits.ViewChannel,
+                PermissionFlagsBits.SendMessages,
+                PermissionFlagsBits.ManageChannels,
+                PermissionFlagsBits.ManageThreads,
+                PermissionFlagsBits.CreatePrivateThreads,
+                PermissionFlagsBits.CreatePublicThreads,
+                PermissionFlagsBits.ReadMessageHistory,
+                PermissionFlagsBits.SendMessagesInThreads,
+            ],
+            "bot"
+        );
 
-                    if (!newChat) {
-                        return await interaction.reply({
-                            content: client.translate(
-                                user,
-                                "startChat",
-                                "noUserDb"
-                            ),
-                            ephemeral: true,
-                        });
-                    }
+        if (!perms) return;
 
-                    await GPT(interaction, newChat, category);
-                    break;
+        const getChoice = interaction.options.get("model", true)
+            .value as string;
+
+        switch (getChoice) {
+            case "gpt3": {
+                const category = getCategory!.channels.gptCategory as
+                    | string
+                    | undefined;
+                if (!category || category.length <= 0) {
+                    return await interaction.reply({
+                        content: client.translate(
+                            user,
+                            "startChat",
+                            "categoryNotSet"
+                        ),
+                        ephemeral: true,
+                    });
                 }
-                case "bing": {
-                    const category = getCategory!.channels.bingCategory as
-                        | string
-                        | undefined;
-                    if (!category || category.length <= 0) {
-                        return await interaction.reply({
-                            content: client.translate(
-                                user,
-                                "startChat",
-                                "categoryNotSet"
-                            ),
-                            ephemeral: true,
-                        });
-                    }
 
-                    const newChat = await userSchema.findOne(
-                        { _id: user.id },
-                        { channels: { bingChat: 1 } }
-                    );
+                const newChat = await userSchema.findOne(
+                    { _id: user.id },
+                    { channels: { gptChat: 1 } }
+                );
 
-                    if (!newChat) {
-                        return await interaction.reply({
-                            content: client.translate(
-                                user,
-                                "startChat",
-                                "noUserDb"
-                            ),
-                            ephemeral: true,
-                        });
-                    }
-
-                    await Bing(interaction, newChat, category);
-                    break;
+                if (!newChat) {
+                    return await interaction.reply({
+                        content: client.translate(
+                            user,
+                            "startChat",
+                            "noUserDb"
+                        ),
+                        ephemeral: true,
+                    });
                 }
+
+                await GPT(interaction, newChat, category);
+                break;
             }
-        } else {
+            case "bing": {
+                const category = getCategory!.channels.bingCategory as
+                    | string
+                    | undefined;
+                if (!category || category.length <= 0) {
+                    return await interaction.reply({
+                        content: client.translate(
+                            user,
+                            "startChat",
+                            "categoryNotSet"
+                        ),
+                        ephemeral: true,
+                    });
+                }
+
+                const newChat = await userSchema.findOne(
+                    { _id: user.id },
+                    { channels: { bingChat: 1 } }
+                );
+
+                if (!newChat) {
+                    return await interaction.reply({
+                        content: client.translate(
+                            user,
+                            "startChat",
+                            "noUserDb"
+                        ),
+                        ephemeral: true,
+                    });
+                }
+
+                await Bing(interaction, newChat, category);
+                break;
+            }
         }
     },
 } as CommandObject;

@@ -19,17 +19,28 @@ Synth Bot is a versatile Discord bot powered by GPT-3.5 API that can assist you 
 
 🔧 Customizable: You can customize the bot's configuration using the /config command to adapt it to your server's needs.
 
-***
+---
 
 <h3 align="center"> Usage 📝</h3>
-Commands are executed through Discord interactions:
+
+<h4>Misc Commands:</h4>
 
 ```
-Allows users to configure both the bot's channel categories and their preferred language (English or Portuguese):
-/config [categories] <?whisper> | <?gpt> | [languages]
+/help - Shows a list of categories of avaiable commands.
+```
 
-Initiates a chat using the selected chat model:
-/start-chat [topic] [model]
+<h4>AI Commands</h4>
+
+```
+/start-chat <subject> <model> - Starts a chat using the specified subject and model (Only Servers).
+/transcribe <file | url> <prompting?> <language? (ISO-639-1)>- Transcribe an audio file or a Youtube video
+```
+
+<h4>Config Commands:</h4>
+
+```
+/config category <tBing | GPT> <#Category> - Sets the category for the specified model (Per Server).
+/config language <English | Portugues> - Sets the language for the bot (Per User).
 ```
 
 You can also start a DM chat with the bot if you don't want to use it at a server.
@@ -46,16 +57,19 @@ GPT-3.5 is a state-of-the-art natural language processing model developed by Ope
 
 <h3 align="center"> Roadmap 🚀</h3>
 
-- [X] Creation of a token quota (These APIs aren't free, you know?)
-- [ ] Integration with [Whisper ASR](https://openai.com/research/whisper) for voice-based interactions
-- [X] Integration with Bing Chat for more robust chatbot functionality
-- [ ] Integration with [Eleven Labs](https://beta.elevenlabs.io/) for personalized voice interfaces
-- [X] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
-- [ ] Integration with Stable Diffusion.
-- [ ] Integration with DALL-E for image creation
-- [ ] Monetization through either: Kofi, Patreon or Github Esponsorship.
-- [ ] Moderation feature through [OpenAI moderation API](https://platform.openai.com/docs/api-reference/moderations) - This is going to make your server boring tho.
-- [X] Cats, lots of them, I love cats.
+-   [x] Creation of a token quota (These APIs aren't free, you know?)
+-   [x] Integration with [Whisper ASR](https://openai.com/research/whisper) for voice-based interactions
+-   [x] Integration with Bing Chat for more robust chatbot functionality
+-   [x] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
+-   [x] Integration with DALL-E for image creation
+-   [ ] System to reset all user's token quota every month.
+-   [ ] Exclusive website for this bot.
+-   [ ] Train an exclusive model using OpenAi's custom training ability.
+-   [ ] Monetization through either: Kofi, Patreon or Github Esponsorship.
+-   [ ] Moderation feature through [OpenAI moderation API](https://platform.openai.com/docs/api-reference/moderations). - This is going to make your server boring tho.
+-   [ ] Integration with [Eleven Labs](https://beta.elevenlabs.io/) for personalized voice interactions.
+-   [ ] Integration with Stable Diffusion.
+-   [x] Cats, lots of them, I love cats.
 
 ---
 

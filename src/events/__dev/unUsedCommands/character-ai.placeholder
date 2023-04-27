@@ -1,0 +1,144 @@
+/**
+ * @notice This is the command that will be using the node_characterai package, but it needs way more testing before it can be used, for now, it's just a placeholder.
+ */
+
+
+import { CommandObject, CommandType } from "@tockawa/wokcommands";
+import {
+    Client,
+    CommandInteraction,
+    User,
+    ApplicationCommandOptionType,
+    PermissionFlagsBits,
+} from "discord.js";
+
+import checkGuild from "../../../configs/validators/commands/runtime/checkGuild";
+import checkBotPerms from "../../../configs/validators/commands/runtime/checkPerms";
+
+export default {
+    description: "Ask me anything without creating a thread!",
+    type: CommandType.SLASH,
+    nameLocalizations: {
+        "pt-BR": "pergunte-me",
+    },
+    descriptionLocalizations: {
+        "pt-BR": "Pergunte-me qualquer coisa sem criar um tópico!",
+    },
+    options: [
+        {
+            name: "start",
+            nameLocalizations: {
+                "pt-BR": "começar",
+            },
+            description: "Start a conversation with a character.",
+            descriptionLocalizations: {
+                "pt-BR": "Comece uma conversa com um personagem.",
+            },
+            type: ApplicationCommandOptionType.Subcommand,
+            options: [
+                {
+                    name: "subject",
+                    nameLocalizations: {
+                        "pt-BR": "assunto",
+                    },
+                    description: "A subject to talk about.",
+                    descriptionLocalizations: {
+                        "pt-BR": "Um assunto para conversar.",
+                    },
+                    type: ApplicationCommandOptionType.String,
+                    required: true,
+                },
+                {
+                    name: "character",
+                    nameLocalizations: {
+                        "pt-BR": "personagem",
+                    },
+                    description: "The character you want to talk to.",
+                    descriptionLocalizations: {
+                        "pt-BR": "O personagem com quem você deseja conversar.",
+                    },
+                    type: ApplicationCommandOptionType.String,
+                    required: true,
+                    choices: [
+                        {
+                            name: "Megumin",
+                            value: "z7Y1m2mkugEb5u5vRwUELYrlULrhs3hke6Ap08KcvQY",
+                        },
+                        {
+                            name: "Raiden Shogun",
+                            value: "RQrrOj-UNdEV2_PC5D03US-27MZ7EUtaRH_husjbRQA",
+                        },
+                        {
+                            name: "Elon Musk",
+                            value: "6HhWfeDjetnxESEcThlBQtEUo0O8YHcXyHqCgN7b2hY",
+                        },
+                        {
+                            name: "Stella",
+                            value: "EEI6sjnddRIJTVC59MODiYjL0-JyDIVI2IEGLkPx2Jk",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "accept-terms",
+            nameLocalizations: {
+                "pt-BR": "aceitar-termos",
+            },
+            description: "Accept the terms of service.",
+            descriptionLocalizations: {
+                "pt-BR": "Aceite os termos de serviço.",
+            },
+            type: ApplicationCommandOptionType.Subcommand,
+        },
+        {
+            name: "help",
+            nameLocalizations: {
+                "pt-BR": "ajuda",
+            },
+            description: "Get help with the command.",
+            descriptionLocalizations: {
+                "pt-BR": "Obtenha ajuda com o comando.",
+            },
+            type: ApplicationCommandOptionType.Subcommand,
+        },
+    ],
+    category: "AI",
+    callback: async ({
+        client,
+        interaction,
+        user,
+    }: {
+        client: Client;
+        interaction: CommandInteraction;
+        user: User;
+    }) => {
+        if (!checkGuild(interaction)) {
+            return await interaction.reply({
+                content: client.translate(user, "defaults", "NaG"),
+                ephemeral: true,
+            });
+        }
+
+        const perms = await checkBotPerms(
+            interaction,
+            [
+                PermissionFlagsBits.ViewChannel,
+                PermissionFlagsBits.SendMessages,
+                PermissionFlagsBits.SendMessagesInThreads,
+            ],
+            "bot"
+        );
+        if (!perms) return;
+
+        const getChoice = interaction.options.get("model", true)
+            .value as string;
+
+        switch (getChoice) {
+            case "free": {
+            }
+            case "token": {
+            }
+        }
+    },
+} as CommandObject;

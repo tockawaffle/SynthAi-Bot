@@ -8,12 +8,14 @@ const userLanguage: any = {};
 
 async function loadUserSettings(client: Client): Promise<void> {
     const userIds = client.users.cache.map((user) => user.id);
-    
+
     const optedOutDb = await optedOut.find({ _id: "optedOut" });
     const optedOutIds: string[] = optedOutDb.flatMap((user) => user.ids);
-    
-    const hasOptedOutUser = userIds.some((userId) => optedOutIds.includes(userId));
-    
+
+    const hasOptedOutUser = userIds.some((userId) =>
+        optedOutIds.includes(userId)
+    );
+
     if (hasOptedOutUser) return;
 
     const foundUsers = await user.find({ _id: { $in: userIds } });
@@ -46,8 +48,15 @@ function setUserLanguage(user: User, languages: string) {
     user.lang = languages;
 }
 
-export default (user: User, commandName: any, textId: any): string => {
-    const t = translations.traduzido as any;
+export default (user: User, commandName: string, textId: string): string => {
+    const t = translations.traduzido as {
+        [key: string]: {
+            [key: string]: {
+                [key: string]: string;
+            };
+        };
+    };
+    
     let u: User;
     if (!user) throw new Error(`argument "user" missing`);
     if (user instanceof User) {

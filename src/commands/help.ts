@@ -63,11 +63,11 @@ export default {
                             .translate(user, "help", "helpFooter")
                             .replace(
                                 "%botOwner%",
-                                client.users.cache.get("876578406144290866")!
+                                client.users.cache.get(process.env.OWNER_ID!)!
                                     .tag
                             ),
                         iconURL: client.users.cache
-                            .get("876578406144290866")!
+                            .get(process.env.OWNER_ID!)!
                             .displayAvatarURL(),
                     })
                     .setColor("Random")
