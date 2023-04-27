@@ -33,14 +33,17 @@ Synth Bot is a versatile Discord bot powered by GPT-3.5 API that can assist you 
 
 ```
 /start-chat <subject> <model> - Starts a chat using the specified subject and model (Only Servers).
-/transcribe <file | url> <prompting?> <language? (ISO-639-1)>- Transcribe an audio file or a Youtube video
+/ask-me <subject> <free | tokenized> - Gives a single awnser with the selected model (Bing or GPT)
+/whisper transcribe <url> <prompting?> <language? (ISO-639-1)> - Transcribe an audio from a Youtube video.
+/whisper translate <url> <prompting?> - Translates an audio from a Youtube video to English.
 ```
 
 <h4>Config Commands:</h4>
 
 ```
-/config category <tBing | GPT> <#Category> - Sets the category for the specified model (Per Server).
+/config category <Bing | GPT> <#Category> - Sets the category for the specified model (Per Server).
 /config language <English | Portugues> - Sets the language for the bot (Per User).
+/opt <in | out> - If "out", it'll delete you from the bot's DB and you'll be unable to use it until you opt in again.
 ```
 
 You can also start a DM chat with the bot if you don't want to use it at a server.
