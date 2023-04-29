@@ -2,7 +2,18 @@
   <kbd> <img src="https://cdn.discordapp.com/avatars/1096096564264579133/a61a1b77e6f327f4af7bba42c6d80d51.webp?size=512"/> </kbd>
 </p>
 
-[![wakatime](https://wakatime.com/badge/github/tockawaffle/SynthAi-Bot.svg)](https://wakatime.com/badge/github/tockawaffle/SynthAi-Bot)
+<div>
+  <a href="https://wakatime.com/badge/github/tockawaffle/SynthAi-Bot">
+    <img src="https://wakatime.com/badge/github/tockawaffle/SynthAi-Bot.svg">
+  </a>
+  <a href="https://top.gg/bot/1096096564264579133">
+    <img src="https://top.gg/api/widget/owner/1096096564264579133.svg">
+  </a>
+  <a href="https://top.gg/bot/1096096564264579133">
+    <img src="https://top.gg/api/widget/servers/1096096564264579133.svg">
+  </a>
+</div>
+
 
 <h1 align="center"> Synth Bot 🤖 </h1>
 Synth Bot is a versatile Discord bot powered by GPT-3.5 API that can assist you with multiple tasks. You can use it to start conversations, ask for help, or even make jokes. With plans to integrate Whisper, Bing Chat, and Eleven Labs in the future, Synth Bot is designed to provide seamless user experience and reliable performance.
