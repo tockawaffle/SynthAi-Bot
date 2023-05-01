@@ -14,9 +14,8 @@
   </a>
 </div>
 
-
 <h1 align="center"> Synth Bot 🤖 </h1>
-Synth Bot is a versatile Discord bot powered by GPT-3.5 API that can assist you with multiple tasks. You can use it to start conversations, ask for help, or even make jokes. With plans to integrate Whisper, Bing Chat, and Eleven Labs in the future, Synth Bot is designed to provide seamless user experience and reliable performance.
+Synth Bot is a versatile Discord bot powered by various AIs that can assist you with multiple tasks. You can use it to start conversations, ask for help, or even make jokes. With plans to integrate Eleven Labs and other APIs in the future, Synth Bot is designed to provide seamless user experience and reliable performance.
 
 ---
 
@@ -76,9 +75,9 @@ GPT-3.5 is a state-of-the-art natural language processing model developed by Ope
 -   [x] Integration with Bing Chat for more robust chatbot functionality
 -   [x] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
 -   [x] Integration with DALL-E for image creation
+-   [ ] Custom "personalities" for the bot.
 -   [ ] System to reset all user's token quota every month.
 -   [ ] Exclusive website for this bot.
--   [ ] Train an exclusive model using OpenAi's custom training ability.
 -   [ ] Monetization through either: Kofi, Patreon or Github Esponsorship.
 -   [ ] Moderation feature through [OpenAI moderation API](https://platform.openai.com/docs/api-reference/moderations). - This is going to make your server boring tho.
 -   [ ] Integration with [Eleven Labs](https://beta.elevenlabs.io/) for personalized voice interactions.
@@ -100,21 +99,41 @@ There are two avaiable options for you to start using me:
 First, you'll need to replace ".env.template" to ".env", and fill the following variables:
 
 ```
-This is your Discord Bot Token, you can get one by going to the developer's page and creating a bot.
+#This is your Discord Bot Token, you can get one by going to the developer's page and creating a bot.
 DISCORD_TOKEN=
 
-You'll need a MongoDb instance, you can either use a local or hosted instance.
+#This is a TopGG Token, you might not want to use it, you can remove all files that invoke this one: src/events/topgg, src/bot.ts @ line 9
+TOPGG_TOKEN=
+
+#You'll need a MongoDb instance, you can either use a local or hosted instance.
 MONGO_URI=
 
-For development, use .ts, for production, use .js
+#For development, use .ts, for production, use .js
 FILE_EXTENSION=
 
-You OpenAI API Key
+#You OpenAI API Key
 GPT_KEY=
+
+#A Cloudflare clearance token.
+CF=
+#A browser user agent.
+UA=
+
 ```
 
-NONE of those variables are optional, you WILL need every single one of them.
+! NONE of those variables are optional, you WILL need every single one of them.
 
+Install NodeJs >= v18.0.0 and run the following commands:
+
+```bash
+npm install
+npm run build
+npm run start
+```
+
+And you're done! You can now use your own instance of Synth Bot!
+
+<h4>Obs:</h4> 
 This bot only works with NodeJs >= v18.0.0
 
 ---

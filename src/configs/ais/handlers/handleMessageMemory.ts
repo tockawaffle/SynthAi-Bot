@@ -6,36 +6,24 @@ export default async (user: User) => {
     let memoryAmount: number;
 
     switch (tier) {
-        case "premium": {
-            memoryAmount = 20;
-            break;
-        }
         case "free": {
             memoryAmount = 5;
             break;
         }
-        case "freemium": {
+        case "premium": {
             memoryAmount = 10;
             break;
         }
-        case "premiumPlus": {
-            memoryAmount = 28;
-            break;
-        }
         case "supporter": {
-            memoryAmount = 35;
+            memoryAmount = 25;
             break;
         }
-        case "supporterPlus": {
+        case "patron": {
             memoryAmount = 40;
             break;
         }
-        case "tester": {
-            memoryAmount = 70;
-            break;
-        }
         case "unlimited": {
-            memoryAmount = 999;
+            memoryAmount = 75;
             break;
         }
         default: {

@@ -4,12 +4,9 @@ export default async (
     interaction: CommandInteraction,
     requiredTier:
         | "free"
-        | "freemium"
         | "premium"
-        | "premiumPlus"
         | "supporter"
-        | "supporterPlus"
-        | "tester"
+        | "patron"
         | "unlimited"
 ) => {
     const { client, user } = interaction;
@@ -18,12 +15,9 @@ export default async (
 
     const premiumOrder = {
         free: 0,
-        freemium: 1,
         premium: 2,
-        premiumPlus: 3,
         supporter: 4,
-        supporterPlus: 5,
-        tester: 6,
+        patron: 6,
         unlimited: 7,
     };
 

@@ -13,7 +13,7 @@ import userSchema from "../../configs/database/models/userSchema";
 import checkGuild from "../../configs/validators/commands/runtime/checkGuild";
 import checkPerms from "../../configs/validators/commands/runtime/checkPerms";
 import optedOut from "../../configs/database/models/optedOut";
-import { Bing, GPT } from "../../configs/commands/exports";
+import { Bing, GPT, GPTE } from "../../configs/commands/exports";
 
 export default {
     description: "Start a chat with the bot!",
@@ -57,6 +57,10 @@ export default {
                     name: "Bing Chat",
                     value: "bing",
                 },
+                {
+                    name: "GPT-4 W/Ethernet",
+                    value: "ethernet",
+                },
             ],
         },
     ],
@@ -70,7 +74,10 @@ export default {
         interaction: CommandInteraction;
         user: User;
     }) => {
-        const isOptedOut = await optedOut.findOne({ _id: "optedOut", ids: { $in: [user.id] } })
+        const isOptedOut = await optedOut.findOne({
+            _id: "optedOut",
+            ids: { $in: [user.id] },
+        });
         if (isOptedOut) {
             return await interaction.reply({
                 content:
@@ -88,7 +95,7 @@ export default {
 
         const getCategory = await serverSchema.findOne(
             { _id: interaction.guild!.id },
-            { channels: { gptCategory: 1, bingCategory: 1 } }
+            { channels: { gptCategory: 1, bingCategory: 1, gpteCategory: 1 } }
         );
 
         const perms = await checkPerms(
@@ -179,6 +186,39 @@ export default {
 
                 await Bing(interaction, newChat, category);
                 break;
+            }
+            case "ethernet": {
+                const category = getCategory!.channels.gpteCategory as
+                    | string
+                    | undefined;
+                if (!category || category.length <= 0) {
+                    return await interaction.reply({
+                        content: client.translate(
+                            user,
+                            "startChat",
+                            "categoryNotSet"
+                        ),
+                        ephemeral: true,
+                    });
+                }
+
+                const newChat = await userSchema.findOne(
+                    { _id: user.id },
+                    { channels: { gpteChat: 1 } }
+                );
+
+                if (!newChat) {
+                    return await interaction.reply({
+                        content: client.translate(
+                            user,
+                            "startChat",
+                            "noUserDb"
+                        ),
+                        ephemeral: true,
+                    });
+                }
+
+                await GPTE(interaction, category, newChat);
             }
         }
     },

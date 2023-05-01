@@ -33,7 +33,7 @@ async function loadUserSettings(client: Client): Promise<void> {
         if (client.users.cache.get(newUser)?.bot) continue;
 
         userLanguage[newUser] = "english";
-        const createdUser = await user.create({
+        await user.create({
             _id: newUser,
             accountSettings: { id: newUser, language: "english" },
         });
@@ -56,7 +56,7 @@ export default (user: User, commandName: string, textId: string): string => {
             };
         };
     };
-    
+
     let u: User;
     if (!user) throw new Error(`argument "user" missing`);
     if (user instanceof User) {

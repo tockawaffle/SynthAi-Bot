@@ -33,6 +33,11 @@ export default async (
 
     const topic = interaction.options.get("subject", true).value as string;
 
+    if (topic.length <= 0)
+        return await interaction.reply({
+            content: client.translate(user, "startChat", "noTopic"),
+        });
+
     const moderation = await moderate(interaction, topic);
     if (moderation) return;
 
@@ -46,7 +51,7 @@ export default async (
 
     if (!getChatOnThisServer) {
         const newChnl = await interaction.guild!.channels.create({
-            name: `gpt-chat-${user.username}`,
+            name: `bing-chat-${user.username}`,
             type: ChannelType.GuildText,
             parent: category,
             topic: `Chat with ${user.username}`,
@@ -75,39 +80,47 @@ export default async (
 
         await interaction.deferReply({ ephemeral: true });
 
-        const bing = await client.bing.sendMessage(topic);
+        try {
+            const bing = await client.bing.sendMessage(topic);
 
-        const data = {
-            serverId: interaction.guild!.id,
-            channelId: newChnl.id,
-            threadId: newThread.id,
-            followUp: bing,
-            model: "bing",
-        };
+            const data = {
+                serverId: interaction.guild!.id,
+                channelId: newChnl.id,
+                threadId: newThread.id,
+                followUp: bing,
+                model: "bing",
+            };
 
-        await userSchema.findOneAndUpdate(
-            { _id: user.id },
-            {
-                $push: {
-                    "channels.bingChat.chat": data,
-                },
-            }
-        );
+            await userSchema.findOneAndUpdate(
+                { _id: user.id },
+                {
+                    $push: {
+                        "channels.bingChat.chat": data,
+                    },
+                }
+            );
 
-        setUserChannel(user, data);
-        await loadChannels(client);
+            setUserChannel(user, data);
+            await loadChannels(client);
 
-        await interaction.editReply({
-            content: client
-                .translate(user, "startChat", "chatStarted")
-                .replace("%s", `${newThread}`),
-        });
+            await interaction.editReply({
+                content: client
+                    .translate(user, "startChat", "chatStarted")
+                    .replace("%s", `${newThread}`),
+            });
 
-        return await newThread.send({
-            content: bing.text,
-        });
+            return await newThread.send({
+                content: bing.text,
+            });
+        } catch (error: any) {
+            return await interaction.editReply({
+                content: client
+                    .translate(user, "startChat", "error")
+                    .replace("%s", error.message),
+            });
+        }
     } else {
-        await interaction.deferReply();
+        await interaction.deferReply({ ephemeral: true });
 
         const getChnl = interaction.guild!.channels.cache.get(
             getChatOnThisServer.channelId
@@ -136,36 +149,44 @@ export default async (
             reason: `Chat with ${user.username}`,
         });
 
-        const bing = await client.bing.sendMessage(topic);
+        try {
+            const bing = await client.bing.sendMessage(topic);
 
-        const data = {
-            serverId: interaction.guild!.id,
-            channelId: getChnl.id,
-            threadId: newThread.id,
-            followUp: bing,
-            model: "bing",
-        };
+            const data = {
+                serverId: interaction.guild!.id,
+                channelId: getChnl.id,
+                threadId: newThread.id,
+                followUp: bing,
+                model: "bing",
+            };
 
-        await userSchema.findOneAndUpdate(
-            { _id: user.id },
-            {
-                $push: {
-                    "channels.gptChat.chat": data,
-                },
-            }
-        );
+            await userSchema.findOneAndUpdate(
+                { _id: user.id },
+                {
+                    $push: {
+                        "channels.gptChat.chat": data,
+                    },
+                }
+            );
 
-        setUserChannel(user, data);
-        await loadChannels(client);
+            setUserChannel(user, data);
+            await loadChannels(client);
 
-        await interaction.editReply({
-            content: client
-                .translate(user, "startChat", "chatStarted")
-                .replace("%s", `${newThread}`),
-        });
+            await interaction.editReply({
+                content: client
+                    .translate(user, "startChat", "chatStarted")
+                    .replace("%s", `${newThread}`),
+            });
 
-        return await newThread.send({
-            content: bing.text,
-        });
+            return await newThread.send({
+                content: bing.text,
+            });
+        } catch (error: any) {
+            return await interaction.editReply({
+                content: client
+                    .translate(user, "startChat", "error")
+                    .replace("%s", error.message),
+            });
+        }
     }
 };

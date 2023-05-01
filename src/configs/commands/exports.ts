@@ -1,10 +1,12 @@
 import gptCategory from "./config/gptCategory";
+import gpteCategory from "./config/gpteCategory";
 import bingCategory from "./config/bingCategory";
 import language from "./config/language";
 import options from "./config/options";
 
-import GPT from "./ais/gpt3/commandFunc";
-import Bing from "./ais/bing/commandFunc";
+import GPT from "./ais/gpt3/gpt";
+import Bing from "./ais/bing/bing";
+import GPTE from "./ais/ethernet/gpte";
 
 import optIn from "./config/opt-in";
 import optOut from "./config/opt-out";
@@ -20,16 +22,16 @@ import helpHandler from "./ais/whisper/helpHandler";
 import whisperOptions from "./ais/whisper/options";
 
 import dalleOptions from "./ais/image/options";
-import dalleGenerator from "./ais/image/dalle/commandFunc"
+import dalleGenerator from "./ais/image/dalle/commandFunc";
 
 import askGpt from "./ais/ask/gpt3";
 import askBing from "./ais/ask/bing";
 
 //Config Command
-export { gptCategory, bingCategory, options, language };
+export { gptCategory, gpteCategory, bingCategory, options, language };
 
 //Start-chat Command
-export { GPT, Bing };
+export { GPT, Bing, GPTE };
 
 //Opt Command
 export { optIn, optOut };

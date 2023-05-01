@@ -24,16 +24,22 @@ export default interface userSchema extends Document {
     };
     premium:
         | "free"
-        | "freemium"
         | "premium"
-        | "premiumPlus"
         | "supporter"
-        | "supporterPlus"
-        | "tester"
-        | "unlimited";
+        | "patron";
     premiumUntil?: Date;
     channels?: {
         gptChat: {
+            chat: [
+                {
+                    serverId: string;
+                    channelId: string;
+                    threadId: string;
+                    model: string;
+                }
+            ];
+        };
+        gpteChat: {
             chat: [
                 {
                     serverId: string;

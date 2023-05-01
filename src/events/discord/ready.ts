@@ -5,8 +5,11 @@ import { wokOptions } from "../../configs/client/clientOptions";
 import { checkCommands } from "../../configs/validators/commands/validations/checkCommands";
 import { loadChannels as loadGptChannels } from "../../configs/database/functions/GptChannels";
 import { loadChannels as loadBingChannels } from "../../configs/database/functions/BingChannel";
+import { loadChannels as loadGpteChannels } from "../../configs/database/functions/GpteChannels";
+
 import charAi from "../../configs/ais/chatBased/characterAi/charAi";
 import checkMissingGuilds from "../../configs/database/functions/getGuilds";
+import phind from "../../../custom_modules/REAPI";
 
 import translateText, {
     loadUserSettings,
@@ -36,10 +39,12 @@ module.exports = {
         client.loadUser = loadUserSettings;
         client.setLanguage = setUserLanguage;
         client.translate = translateText;
-        client.gptSystem = systemImput
+        client.gptSystem = systemImput;
+        client.gpte = phind;
 
         await defineUsers(client);
         await loadGptChannels(client);
+        await loadGpteChannels(client)
         await loadBingChannels(client);
         await checkMissingGuilds(client);
         await ChatGPT(process.env.GPT_KEY!, client);

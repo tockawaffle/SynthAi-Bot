@@ -27,6 +27,9 @@ const userSchema = new Schema<userSchema>({
         gptChat: {
             chat: { type: Array, required: true },
         },
+        gpteChat: {
+            chat: { type: Array, required: true },
+        },
         bingChat: {
             chat: { type: Array, required: true },
         },

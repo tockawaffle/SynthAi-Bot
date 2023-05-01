@@ -12,7 +12,6 @@ import {
 import tokenHandler from "../../../ais/handlers/gptTokenHandler";
 
 import moderate from "../../../../events/__dev/moderation";
-import moment from "moment";
 
 export default async (
     interaction: CommandInteraction,
@@ -34,6 +33,12 @@ export default async (
     )[0];
 
     const topic = interaction.options.get("subject", true).value as string;
+
+    if (topic.length <= 0)
+        return await interaction.reply({
+            content: client.translate(user, "startChat", "noTopic"),
+            ephemeral: true,
+        });
 
     const token = await tokenHandler(topic, interaction);
     if (!token) return;
@@ -125,7 +130,7 @@ export default async (
             content: gpt.data.choices[0].message!.content,
         });
     } else {
-        await interaction.deferReply();
+        await interaction.deferReply({ ephemeral: true });
 
         const getChnl = interaction.guild!.channels.cache.get(
             getChatOnThisServer.channelId

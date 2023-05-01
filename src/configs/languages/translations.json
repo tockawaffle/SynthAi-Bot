@@ -34,6 +34,10 @@
                 "english": "An error has occurred, please try again later.",
                 "portugues": "Ocorreu um erro, tente novamente mais tarde."
             },
+            "apiError": {
+                "english": "An error has occurred while communicating with the API, please try again later.\nIf you can, report this error on my GitHub repository: %e",
+                "portugues": "Ocorreu um erro ao se comunicar com a API, tente novamente mais tarde.\nSe puder, reporte este erro no meu repositório do GitHub: %e"
+            },
             "insufficientTier": {
                 "english": "You do not have the required tier to use this command. The necessary tier is: %t",
                 "portugues": "Você não possui o tier necessário para utilizar este comando. O tier necessário é: %t"
@@ -155,6 +159,10 @@
             "whisperCategorySet": {
                 "english": "Whisper Category set to: %s",
                 "portugues": "Categoria do Whisper definida para: %s"
+            },
+            "gpteCategorySet": {
+                "english": "GPTe Category set to: %s",
+                "portugues": "Categoria do GPTe definida para: %s"
             }
         },
         "startChat": {
@@ -173,6 +181,10 @@
             "missingChannel": {
                 "english": "I couldn't find the channel that was assigned to you, I'm resetting it, try again.",
                 "portugues": "Não consegui encontrar o canal que foi atribuído a você, estou redefinindo-o, tente novamente."
+            },
+            "noTopic": {
+                "english": "You didn't send a topic, try again.",
+                "portugues": "Você não enviou um tópico, tente novamente."
             }
         },
         "opt": {
@@ -235,24 +247,21 @@
                 "portugues": "Este comando traduz apenas aúdios para o inglês.\n\nEstes são os seguintes argumentos que você pode usar com este comando:\nUrl: ```Você deve fornecer uma URL para um vídeo do Youtube que você deseja traduzir para o inglês```Prompting: ```Um texto opcional para guiar o estilo do modelo ou continuar um segmento de áudio anterior. O prompt deve estar em inglês.```"
             }
         },
-        "createMe": {
-            "alreadyHasCustomPersonality": {
-                "english": "You already have a custom personality, you can't create another one.\nDelete your current custom personality to create a new one.",
-                "portugues": "Você já tem uma personalidade personalizada, você não pode criar outra.\nExclua sua personalidade personalizada atual para criar uma nova."
+        "image": {
+            "openAiErrored": {
+                "english": "An error occurred while trying to generate the image: %s\n\nThe OpenAi API might be down, you can check it here: https://status.openai.com/",
+                "portugues": "Ocorreu um erro ao tentar gerar a imagem: %s\n\nA API do OpenAi pode estar fora do ar, você pode verificar aqui: https://status.openai.com/"
             },
-            "openaiUsagePolicy": {
-                "english": "Before creating this personality, you must read and agree to the OpenAI Usage Policy.\nThis function is highly cost-intensive, and to maintain control, you will be limited to a total of 1 custom personality.\nPlease note that this personality will not be fully customizable, as it will include a system prompt instructing the AI not to infringe on OpenAI's policies and Discord's policies.\n\nTo review the OpenAI Usage Policy, please visit [OpenAi's Website](https://openai.com/policies/usage-policies).\nIf you agree to the policy, please click the button below. If you do not agree, please disregard this message.\n\nThank you for your understanding and cooperation.\n%bo.\n\nCustom Personality: ``` %p ```\nType: ``` %t ```\nId: ``` %i ```",
-                "portugues": "Antes de criar esta personalidade, você deve ler e concordar com a Política de Uso da OpenAI.\nEsta função é altamente intensiva em custos e, para manter o controle, você será limitado a um total de 1 personalidade personalizada.\nObserve que esta personalidade não será totalmente personalizável, pois incluirá um prompt do sistema instruindo a IA a não infringir as políticas da OpenAI e as políticas do Discord.\n\nPara revisar a Política de Uso da OpenAI, visite [o site da OpenAi](https://openai.com/policies/usage-policies).\nSe você concorda com a política, clique no botão abaixo. Se você não concorda, ignore esta mensagem.\n\nObrigado pela sua compreensão e cooperação.\n%bo.\n\nPersonalidade Personalizada: ``` %p ```\nTipo: ``` %t ```\nId: %i"
-            },
-            "openaiUsagePolicyTitle": {
-                "english": "Usage Policy",
-                "portugues": "Política de Uso"
-            },
-            "openaiUsagePolicyButton": {
-                "english": "I agree to the OpenAI Usage Policy",
-                "portugues": "Eu concordo com a Política de Uso da OpenAI"
+            "customModeration": {
+                "english": "Your prompt got flagged by our secondary moderation system, here's the details:\n\n```Word flagged: %w\nReason: %r\nGravity: %g```\nYou can try to remove the word and try again. Or use the command in a NSFW channel.",
+                "portugues": "Seu prompt foi marcado pelo nosso sistema de moderação secundário, aqui estão os detalhes:\n\n```Palavra marcada: %w\nRazão: %r\nGravidade: %g```\nVocê pode tentar remover a palavra e tentar novamente. Ou use o comando em um canal NSFW."
             }
-
+        },
+        "ask": {
+            "errorApi": {
+                "english": "Seems like this API isn't working as intended and might output some errors, sorry. You can try again later.```Error Code: %ec\nError Message: %em```",
+                "portugues": "Parece que esta API não está funcionando como o esperado e pode gerar alguns erros, desculpe. Você pode tentar novamente mais tarde.```Código de erro: %ec\nMensagem de erro: %em```"
+            }
         }
     }
 }
