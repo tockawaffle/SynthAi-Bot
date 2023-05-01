@@ -54,6 +54,9 @@ export default class Completion {
 
         const browser = await puppeteer.launch({
             headless: "new",
+            args: [
+                "--no-sandbox",
+            ]
         });
         const page = await browser.newPage();
         await page.setExtraHTTPHeaders(headers);

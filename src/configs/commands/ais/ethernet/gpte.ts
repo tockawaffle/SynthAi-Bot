@@ -32,8 +32,6 @@ export default async function ethernetGpt(
         (chat: { serverId: string }) => chat.serverId === interaction.guild!.id
     )[0];
 
-    console.log(gpteChat, getChatOnThisServer);
-
     const topic = interaction.options.get("subject", true).value as string;
 
     if (topic.length <= 0)
