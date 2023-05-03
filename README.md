@@ -92,7 +92,7 @@ There are two avaiable options for you to start using me:
 
 **1:** You can either invite me to your Discord Server by using [this](https://discord.com/oauth2/authorize?client_id=1096096564264579133&scope=bot&permissions=536840858736) link.
 
-(Need any help or support? Join this Discord Server: [Tocka's Nest](https://discord.gg/d7B7fnp2BW) )
+(Need any help or support? Join this Discord Server: [Tocka's Nest](https://discord.gg/PtnZGGt8DD) )
 
 **2:** Create your own instance of this bot:
 
