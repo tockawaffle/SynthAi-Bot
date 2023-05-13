@@ -81,7 +81,7 @@ Whisper ASR is a speech recognition API developed by OpenAI. It is capable of tr
 
 -   [x] Creation of a token quota (These APIs aren't free, you know?)
 -   [x] Integration with [Whisper ASR](https://openai.com/research/whisper) for voice-based interactions
--   [x] Integration with Bing Chat for more robust chatbot functionality - <DEPRECATED>
+-   [x] Integration with Bing Chat for more robust chatbot functionality - !DEPRECATED
 -   [x] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
 -   [x] Integration with DALL-E for image creation
 -   [ ] Custom "personalities" for the bot.
