@@ -81,7 +81,7 @@ Whisper ASR is a speech recognition API developed by OpenAI. It is capable of tr
 
 -   [x] Creation of a token quota (These APIs aren't free, you know?)
 -   [x] Integration with [Whisper ASR](https://openai.com/research/whisper) for voice-based interactions
--   [x] Integration with Bing Chat for more robust chatbot functionality - <DEPRECATED>
+-   [x] Integration with Bing Chat for more robust chatbot functionality - !DEPRECATED
 -   [x] Opt-in and Opt-out from the Bot's DB. (Defaults to Opted-in at the moment the bot was added to the server)
 -   [x] Integration with DALL-E for image creation
 -   [ ] Custom "personalities" for the bot.
@@ -124,11 +124,12 @@ FILE_EXTENSION=
 GPT_KEY=
 
 #The proxy API that you'll use to get access to GPT with internet.
-PROXY_API=
+PROXY_API= <optional>
 
 ```
 
-! NONE of those variables are optional, you WILL need every single one of them.
+! MOST of those variables are optional, you MIGHT need every single one of them.
+! "PROXY_API" is optional, if none is given, it'll use the built-in module using DuckDuckGo (Might output some weird stuff tho)
 
 Install NodeJs >= v18.0.0 and run the following commands:
 
