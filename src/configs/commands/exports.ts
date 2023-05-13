@@ -1,12 +1,13 @@
 import gptCategory from "./config/gptCategory";
 import gpteCategory from "./config/gpteCategory";
-import bingCategory from "./config/bingCategory";
+import customCategory from "./config/customCategory";
 import language from "./config/language";
 import options from "./config/options";
 
 import GPT from "./ais/gpt3/gpt";
-import Bing from "./ais/bing/bing";
-import GPTE from "./ais/ethernet/gpte";
+// import GPT4E from "./ais/ethernet/gpt4";
+import GPT3E from "./ais/ethernet/gpt3";
+import help from "./ais/startChat/help";
 
 import optIn from "./config/opt-in";
 import optOut from "./config/opt-out";
@@ -24,14 +25,14 @@ import whisperOptions from "./ais/whisper/options";
 import dalleOptions from "./ais/image/options";
 import dalleGenerator from "./ais/image/dalle/commandFunc";
 
-import askGpt from "./ais/ask/gpt3";
-import askBing from "./ais/ask/bing";
+import askGpt from "./ais/ask/gpt";
+import askGpte from "./ais/ask/gpte";
 
 //Config Command
-export { gptCategory, gpteCategory, bingCategory, options, language };
+export { gptCategory, gpteCategory, customCategory, options, language };
 
 //Start-chat Command
-export { GPT, Bing, GPTE };
+export { GPT, GPT3E, help };
 
 //Opt Command
 export { optIn, optOut };
@@ -46,4 +47,4 @@ export { whisperOptions, urlHandler, helpHandler, translateUrlHandler };
 export { dalleOptions, dalleGenerator };
 
 //Ask
-export { askGpt, askBing };
+export { askGpt, askGpte };

@@ -3,7 +3,7 @@ export default interface serverSchema extends Document {
     channels: {
         gptCategory: string;
         gpteCategory: string;
-        bingCategory: string;
+        customCategory: string;
         // commandsChannel: string;
         // welcomeChannel?: string;
         // rulesChannel?: string;

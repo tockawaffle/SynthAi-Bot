@@ -22,11 +22,7 @@ export default interface userSchema extends Document {
             avaiable256: number;
         };
     };
-    premium:
-        | "free"
-        | "premium"
-        | "supporter"
-        | "patron";
+    premium: "free" | "premium" | "supporter" | "patron";
     premiumUntil?: Date;
     channels?: {
         gptChat: {
@@ -49,14 +45,13 @@ export default interface userSchema extends Document {
                 }
             ];
         };
-        bingChat: {
+        customChat: {
             chat: [
                 {
                     serverId: string;
                     channelId: string;
                     threadId: string;
-                    model: string;
-                    followUp: any;
+                    personality: string;
                 }
             ];
         };

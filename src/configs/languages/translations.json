@@ -34,6 +34,10 @@
                 "english": "An error has occurred, please try again later.",
                 "portugues": "Ocorreu um erro, tente novamente mais tarde."
             },
+            "permsError": {
+                "english": "An error has occurred because of insuficient permissions, check what permissions I have and might need, and after that, try again.\nError: ```%e```",
+                "portugues": "Ocorreu um erro por conta de permissões insuficientes, verifique quais permissões eu tenho e quais eu preciso, e depois tente novamente.\nError: ```%e```"
+            },
             "apiError": {
                 "english": "An error has occurred while communicating with the API, please try again later.\nIf you can, report this error on my GitHub repository: %e",
                 "portugues": "Ocorreu um erro ao se comunicar com a API, tente novamente mais tarde.\nSe puder, reporte este erro no meu repositório do GitHub: %e"
@@ -41,12 +45,16 @@
             "insufficientTier": {
                 "english": "You do not have the required tier to use this command. The necessary tier is: %t",
                 "portugues": "Você não possui o tier necessário para utilizar este comando. O tier necessário é: %t"
+            },
+            "startMessage": {
+                "english": "%bo: As the creator of Synth Bot, I would like to suggest a few things to keep in mind when interacting with me:\n\n1. I'm here to help and assist you, so feel free to ask me any questions or share your concerns with me. I will do my best to provide you with accurate and helpful information.\n\n2. It's important to remember that I'm a chatbot and may not have all the answers. If I'm unable to provide you with a satisfactory response, I will let you know and suggest alternative resources or options for further assistance.\n\n3. I understand that dealing with technology can sometimes be frustrating, but please know that I'm here to help and support you. I will always strive to maintain a professional and respectful tone in our interactions, while also being personable and engaging.\n\nThank you for using Synth Bot, and I look forward to assisting you!",
+                "portuguese": "%bo: Como criador do Synth Bot, gostaria de sugerir algumas coisas a serem lembradas ao interagir comigo:\n\n1. Estou aqui para ajudar e assistir você, então sinta-se à vontade para me fazer perguntas ou compartilhar suas preocupações comigo. Farei o meu melhor para fornecer informações precisas e úteis.\n\n2. É importante lembrar que sou um chatbot e pode ser que não tenha todas as respostas. Se não puder fornecer uma resposta satisfatória, informarei e sugerirei recursos alternativos ou opções para obter mais ajuda.\n\n3. Entendo que lidar com a tecnologia pode ser frustrante às vezes, mas saiba que estou aqui para ajudar e apoiar você. Sempre buscarei manter um tom profissional e respeitoso em nossas interações, enquanto também sendo amigável e envolvente.\n\nObrigado por usar o Synth Bot e estou ansioso para ajudá-lo!"
             }
         },
         "tokens": {
             "gptNET": {
-                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %t tokens.\nBut you can always use Bing!",
-                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %t tokens.\nPorém você pode sempre utilizar o Bing!"
+                "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %t tokens.",
+                "portugues": "Você não tem tokens suficientes para usar este comando. Você tem %s tokens e precisa de %t tokens."
             },
             "whisperNET": {
                 "english": "You don't have enough tokens to use this command. You have %s tokens, and you need %t tokens.",
@@ -63,7 +71,7 @@
                 "portugues": "Menu de Ajuda - %botName%"
             },
             "helpDescription": {
-                "english": "Hi, I'm Synth Bot! 👋 I'm here to enhance our interactions on Discord, thanks to my skills powered by GPT-3.5 and Bing. 🧠 I aim to make our conversations more engaging and thrilling! 🎆 Don't hesitate to chat with me, as I'm always up for a good conversation!\n\nMy unique feature allows you to chat with me in an easy and natural way. I can interact with you through specific commands, in a chat created via a command, or even respond to your messages directly in our private conversation.\n\nI'm designed to be intuitive and user-friendly, making me accessible to everyone, regardless of their familiarity with advanced technologies. I'm always ready to help, answer your questions, and engage in interesting conversations throughout your Discord journey.\n\nI'm looking forward to chatting with you and making your Discord experience even more exciting",
+                "english": "Hi, I'm Synth Bot! 👋 I'm here to enhance our interactions on Discord, thanks to my skills powered by GPT. 🧠 I aim to make our conversations more engaging and thrilling! 🎆 Don't hesitate to chat with me, as I'm always up for a good conversation!\n\nMy unique feature allows you to chat with me in an easy and natural way. I can interact with you through specific commands, in a chat created via a command, or even respond to your messages directly in our private conversation.\n\nI'm designed to be intuitive and user-friendly, making me accessible to everyone, regardless of their familiarity with advanced technologies. I'm always ready to help, answer your questions, and engage in interesting conversations throughout your Discord journey.\n\nI'm looking forward to chatting with you and making your Discord experience even more exciting",
                 "portugues": "E aí, galera! Eu sou o Synth Bot! 👋 Tô aqui para melhorar nossas interações no Discord e deixar nossas conversas mais divertidas! 🎆 Pode falar comigo à vontade, tô sempre disponível para bater um papo maneiro! Ah, e o legal é que você pode conversar comigo de um jeito fácil e natural. Tem vários jeitos de interagir comigo: através de comandos específicos, em um chat criado por um comando ou até mesmo direto na nossa conversa privada.\n\nEu sou feito para ser super intuitivo e fácil de usar, então não precisa se preocupar se você não manja muito de tecnologia. Tô aqui pra ajudar e responder às suas perguntas, e sempre tô pronto pra participar de conversas iradas no Discord! Então vamos conversar logo e deixar a nossa experiência no Discord ainda mais emocionante! 🚀"
             },
             "helpFooter": {
@@ -152,17 +160,21 @@
                 "english": "This server doesn't exist on my database, something might've gone wrong or I was offline when I was added to this server. Please, remove me and add me again.",
                 "portugues": "Este servidor não existe no meu banco de dados, algo pode ter dado errado ou eu estava offline quando fui adicionado a este servidor. Por favor, remova-me e adicione-me novamente."
             },
-            "bingCategorySet": {
-                "english": "Bing Category set to: %s",
-                "portugues": "Categoria do Bing definida para: %s"
-            },
             "whisperCategorySet": {
                 "english": "Whisper Category set to: %s",
                 "portugues": "Categoria do Whisper definida para: %s"
             },
+            "customCategorySet": {
+                "english": "Custom Category set to: %s",
+                "portugues": "Categoria Personalizada definida para: %s"
+            },
             "gpteCategorySet": {
                 "english": "GPTe Category set to: %s",
                 "portugues": "Categoria do GPTe definida para: %s"
+            },
+            "missingPermissions": {
+                "english": "Seems like I lack the permissions to do that. Please, give me the 'Manage Channels' permission and try again. If you have any questions about my permissions, use the 'help' command in the Credits category for more information.",
+                "portugues": "Parece que eu não tenho permissão para fazer isso. Por favor, me dê a permissão 'Gerenciar Canais' e tente novamente. Se você tiver alguma dúvida sobre minhas permissões, utilize o comando 'help' na categoria Créditos para mais informações"
             }
         },
         "startChat": {
@@ -185,6 +197,14 @@
             "noTopic": {
                 "english": "You didn't send a topic, try again.",
                 "portugues": "Você não enviou um tópico, tente novamente."
+            },
+            "startMessage": {
+                "english": "%bo: As the creator of Synth Bot, I would like to suggest a few things to keep in mind when interacting with me:\n\n1. I'm here to help and assist you, so feel free to ask me any questions or share your concerns with me. I will do my best to provide you with accurate and helpful information.\n\n2. It's important to remember that I'm a chatbot and may not have all the answers. If I'm unable to provide you with a satisfactory response, I will let you know and suggest alternative resources or options for further assistance.\n\n3. I understand that dealing with technology can sometimes be frustrating, but please know that I'm here to help and support you. I will always strive to maintain a professional and respectful tone in our interactions, while also being personable and engaging.\n\nThank you for using Synth Bot, and I look forward to assisting you!",
+                "portuguese": "%bo: Como criador do Synth Bot, gostaria de sugerir algumas coisas a serem lembradas ao interagir comigo:\n\n1. Estou aqui para ajudar e assistir você, então sinta-se à vontade para me fazer perguntas ou compartilhar suas preocupações comigo. Farei o meu melhor para fornecer informações precisas e úteis.\n\n2. É importante lembrar que sou um chatbot e pode ser que não tenha todas as respostas. Se não puder fornecer uma resposta satisfatória, informarei e sugerirei recursos alternativos ou opções para obter mais ajuda.\n\n3. Entendo que lidar com a tecnologia pode ser frustrante às vezes, mas saiba que estou aqui para ajudar e apoiar você. Sempre buscarei manter um tom profissional e respeitoso em nossas interações, enquanto também sendo amigável e envolvente.\n\nObrigado por usar o Synth Bot e estou ansioso para ajudá-lo!"
+            },
+            "help": {
+                "english": "Hey! If you're here you didn't understand how to use this command, not a problem!\nHere's a quick guide on how to use this command:\n\n1. You'll first have to set a category for the chatbot to use, you can do this by using the `/setup category <model> <#Category>` command. (Only users with the right permissions can use this command)\n2. After you've set a category, you can now use this command with the model you've set, for example: `/start-chat <topic> <model>`\n3. Now you'll wait! The bot will create a channel in the category you've set, and in that channel he's going to create a thread with the topic you've set, and you can now chat with the bot!\n4. That's it! You can now spend your time chatting with the bot!\n\nIf you have any questions, feel free to join our [support server](https://discord.gg/PtnZGGt8DD)\nWant more tokens? You can get more tokens by voting for us on [top.gg](https://top.gg/bot/1096096564264579133?s=02e862c3cfd58) or by donating to us on [kofi](https://ko-fi.com/tocka)",
+                "portuguese": "Ei! Se você está aqui, então não entendeu como usar este comando, não tem problema!\nAqui está um guia rápido sobre como usar este comando:\n\n1. Você primeiro terá que definir uma categoria para o chatbot usar, você pode fazer isso usando o comando `/setup category <model> <#Categoria> (Apenas pessoas com permissão suficiente poderá utilizar este comando)`.\n2. Depois de definir uma categoria, você pode usar este comando com o modelo que definiu, por exemplo: `/start-chat <tópico> <modelo>`\n3. Agora você vai esperar! O bot criará um canal na categoria que você definiu, e nesse canal ele vai criar um tópico com o tópico que você definiu, e você pode conversar com o bot agora!\n4. É isso! Agora você pode passar seu tempo conversando com o bot!\n\nSe você tiver alguma dúvida, sinta-se à vontade para entrar em nosso [servidor de suporte](https://discord.gg/PtnZGGt8DD)\nQuer mais tokens? Você pode obter mais tokens votando em nós no [top.gg](https://top.gg/bot/1096096564264579133?s=02e862c3cfd58) ou doando para nós no [kofi](https://ko-fi.com/tocka)"
             }
         },
         "opt": {

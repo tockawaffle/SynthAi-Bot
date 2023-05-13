@@ -11,7 +11,7 @@ import WOKCommands, {
     CommandObject,
     CommandType,
 } from "@tockawa/wokcommands/";
-import handleOptedOut from "../configs/database/functions/handleOptedOut";
+import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 
 export default {
     type: CommandType.SLASH,
@@ -40,8 +40,8 @@ export default {
             );
         }
 
-        const categories = ["AI", "Configuration", "Credits"];
-        const emojis = ["🤖", "⚙️", "📜"];
+        const categories = ["AI", "Configuration", "Credits", "Utilities"];
+        const emojis = ["🤖", "⚙️", "📜", "💼"];
 
         return await interaction.reply({
             embeds: [

@@ -27,20 +27,6 @@ export default [
                 ],
             },
             {
-                name: "bing-category",
-                description:
-                    "Set the category so the chat creates a channel for each user.",
-                type: ApplicationCommandOptionType.Subcommand,
-                options: [
-                    {
-                        name: "category",
-                        description: "Set the category.",
-                        type: ApplicationCommandOptionType.Channel,
-                        required: true,
-                    },
-                ],
-            },
-            {
                 name: "gpte-category",
                 description:
                     "Set the category so the chat creates a channel for each user.",
@@ -53,7 +39,21 @@ export default [
                         required: true,
                     },
                 ],
-            }
+            },
+            // {
+            //     name: "custom-category",
+            //     description:
+            //         "Set the category so the chat creates a channel for each user.",
+            //     type: ApplicationCommandOptionType.Subcommand,
+            //     options: [
+            //         {
+            //             name: "category",
+            //             description: "Set the category.",
+            //             type: ApplicationCommandOptionType.Channel,
+            //             required: true,
+            //         },
+            //     ],
+            // },
         ],
     },
     {

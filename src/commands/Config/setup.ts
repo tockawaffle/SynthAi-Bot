@@ -5,8 +5,8 @@ import {
     options,
     gptCategory,
     language,
-    bingCategory,
     gpteCategory,
+    customCategory,
 } from "../../configs/commands/exports";
 import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 
@@ -50,7 +50,7 @@ export default {
                 const SubCommand = {
                     GPT_CATEGORY: "gpt-category",
                     GPTE_CATEGORY: "gpte-category",
-                    BING_CATEGORY: "bing-category",
+                    CUSTOM_CATEGORY: "custom-category",
                 };
 
                 const subCommandName = interaction.options.data[0].options![0]
@@ -65,9 +65,8 @@ export default {
                         await gpteCategory(interaction);
                         break;
                     }
-                    case SubCommand.BING_CATEGORY: {
-                        await bingCategory(interaction);
-                        break;
+                    case SubCommand.CUSTOM_CATEGORY: {
+                        await customCategory(interaction);
                     }
                 }
             }

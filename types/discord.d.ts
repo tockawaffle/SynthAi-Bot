@@ -1,8 +1,8 @@
-import { ChatGPTAPI } from "chatgpt";
-import { OpenAIApi } from "openai";
-import charAi from "node_characterai";
-import { BingChat } from "bing-chat";
 import { REST } from "discord.js";
+import { OpenAIApi } from "openai";
+import { ChatGPTAPI } from "chatgpt";
+import { OpenAIPluginApi } from "@tockawa/openai-plugin";
+import charAi from "node_characterai";
 import WOK from "@tockawa/wokcommands";
 import translate from "../src/configs/languages/lang";
 import "discord.js";
@@ -11,24 +11,9 @@ declare module "discord.js" {
     export interface Client {
         WOK: WOK;
         rest: REST;
-        bing: BingChat;
         openai: OpenAIApi;
-        gpte: (
-            model: "gpt-4" | "gpt-3.5-turbo" | "gpt-3.5" = "gpt-4",
-            cf_clearance: string,
-            user_agent: string,
-            prompt: string,
-            creative?: boolean,
-            detailed?: boolean
-        ) => Promise<{
-            response: string;
-            details: {
-                contexts: number;
-                tokens: number;
-                model: string;
-                timeUntilCompletion: string;
-            };
-        }>;
+        openaiPlugin: OpenAiPluginApi
+        gpte: OpenAIPluginApi;
         charai: charAi;
         gptSystem: (
             user: User,

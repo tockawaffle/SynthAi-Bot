@@ -2,16 +2,15 @@ import { Client } from "discord.js";
 
 import RegisterEvents from "../../configs/listeners/events/eventListener";
 import RegisterTopEvents from "../../configs/listeners/events/topggEvents";
-import bing from "../../configs/ais/chatBased/bing/bing";
-import { BasePoster } from "topgg-autoposter/dist/structs/BasePoster";
+import AutoPoster from "topgg-autoposter";
 
-export default async function (
-    client: Client,
-    poster: BasePoster,
-    evenstDir: string
-) {
+export default async function (client: Client, evenstDir: string) {
     await RegisterEvents(client, `${evenstDir}/discord`);
-    await RegisterTopEvents(poster, client, `${evenstDir}/topgg`);
+    if (process.env.TOPGG_TOKEN) {
+        const poster = AutoPoster(process.env.TOPGG_TOKEN!, client);
 
-    await bing(client);
+        await RegisterTopEvents(poster, client, `${evenstDir}/topgg`);
+    } else {
+        console.log("Top.gg token not found, skipping...");
+    }
 }

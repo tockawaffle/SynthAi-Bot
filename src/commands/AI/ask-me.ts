@@ -10,7 +10,7 @@ import {
 import checkGuild from "../../configs/validators/commands/runtime/checkGuild";
 import checkBotPerms from "../../configs/validators/commands/runtime/checkPerms";
 import optedOut from "../../configs/database/models/optedOut";
-import { askBing, askGpt } from "../../configs/commands/exports";
+import { askGpt, askGpte } from "../../configs/commands/exports";
 
 export default {
     description: "Ask me anything without creating a thread!",
@@ -47,12 +47,12 @@ export default {
             required: true,
             choices: [
                 {
-                    name: "Free",
-                    value: "free",
+                    name: "Gpt-3.5",
+                    value: "gpt",
                 },
                 {
-                    name: "Tokenized",
-                    value: "token",
+                    name: "Gpte-3.5",
+                    value: "gpte",
                 },
             ],
         },
@@ -67,7 +67,10 @@ export default {
         interaction: CommandInteraction;
         user: User;
     }) => {
-        const isOptedOut = await optedOut.findOne({ _id: "optedOut", ids: { $in: [user.id] } })
+        const isOptedOut = await optedOut.findOne({
+            _id: "optedOut",
+            ids: { $in: [user.id] },
+        });
         if (isOptedOut) {
             return await interaction.reply({
                 content:
@@ -98,12 +101,12 @@ export default {
             .value as string;
 
         switch (getChoice) {
-            case "free": {
-                await askBing(interaction);
+            case "gpt": {
+                await askGpt(interaction);
                 break;
             }
-            case "token": {
-                await askGpt(interaction);
+            case "gpte": {
+                await askGpte(interaction);
                 break;
             }
         }

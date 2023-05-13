@@ -4,12 +4,12 @@ import { wokOptions } from "../../configs/client/clientOptions";
 
 import { checkCommands } from "../../configs/validators/commands/validations/checkCommands";
 import { loadChannels as loadGptChannels } from "../../configs/database/functions/GptChannels";
-import { loadChannels as loadBingChannels } from "../../configs/database/functions/BingChannel";
 import { loadChannels as loadGpteChannels } from "../../configs/database/functions/GpteChannels";
+import { loadChannels as loadCustomChannels } from "../../configs/database/functions/CustomChannels";
 
 import charAi from "../../configs/ais/chatBased/characterAi/charAi";
 import checkMissingGuilds from "../../configs/database/functions/getGuilds";
-import phind from "../../../custom_modules/REAPI";
+import gpte3 from "../../configs/ais/chatBased/gpte/GPT3E";
 
 import translateText, {
     loadUserSettings,
@@ -40,12 +40,12 @@ module.exports = {
         client.setLanguage = setUserLanguage;
         client.translate = translateText;
         client.gptSystem = systemImput;
-        client.gpte = phind;
-
+        client.gpte = gpte3();
+        
         await defineUsers(client);
         await loadGptChannels(client);
-        await loadGpteChannels(client)
-        await loadBingChannels(client);
+        await loadGpteChannels(client);
+        await loadCustomChannels(client);
         await checkMissingGuilds(client);
         await ChatGPT(process.env.GPT_KEY!, client);
         // await charAi(client);

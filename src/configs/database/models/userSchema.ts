@@ -30,7 +30,7 @@ const userSchema = new Schema<userSchema>({
         gpteChat: {
             chat: { type: Array, required: true },
         },
-        bingChat: {
+        customChat: {
             chat: { type: Array, required: true },
         },
     },

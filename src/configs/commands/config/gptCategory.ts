@@ -1,4 +1,5 @@
 import {
+    CategoryChannel,
     Client,
     CommandInteraction,
     GuildBasedChannel,
@@ -13,7 +14,10 @@ import optedOut from "../../database/models/optedOut";
 export default async function (interaction: CommandInteraction) {
     const { guild, user, client } = interaction;
 
-    const isOptedOut = await optedOut.findOne({ _id: "optedOut", ids: { $in: [user.id] } })
+    const isOptedOut = await optedOut.findOne({
+        _id: "optedOut",
+        ids: { $in: [user.id] },
+    });
     if (isOptedOut) {
         return await interaction.reply({
             content:
@@ -45,6 +49,7 @@ export default async function (interaction: CommandInteraction) {
 
     const gptCategory = interaction.options.get("category", true)
         .value as string;
+
     const checkCategory = guild!.channels.cache.get(
         gptCategory
     ) as GuildBasedChannel;
@@ -57,6 +62,55 @@ export default async function (interaction: CommandInteraction) {
             ),
         });
     } else {
+        async function setCategoryPermissions(
+            interaction: CommandInteraction,
+            category: string
+        ) {
+            const { client, guild } = interaction;
+            const g = guild!;
+            const c = g.channels.cache.get(category) as CategoryChannel;
+
+            await c.permissionOverwrites.create(client.user!, {
+                ViewChannel: true,
+                SendMessages: true,
+                SendMessagesInThreads: true,
+                CreatePrivateThreads: true,
+                CreatePublicThreads: true,
+                ReadMessageHistory: true,
+                ManageChannels: true,
+                ManageThreads: true,
+                UseExternalEmojis: true,
+                EmbedLinks: true,
+                AttachFiles: true,
+            });
+
+            const newPerms = c.permissionsFor(client.user!.id)?.has([
+                PermissionFlagsBits.ViewChannel,
+                PermissionFlagsBits.SendMessages,
+                PermissionFlagsBits.SendMessagesInThreads,
+                PermissionFlagsBits.CreatePrivateThreads,
+                PermissionFlagsBits.CreatePublicThreads,
+                PermissionFlagsBits.ReadMessageHistory,
+                PermissionFlagsBits.ManageChannels,
+                PermissionFlagsBits.ManageThreads,
+                PermissionFlagsBits.UseExternalEmojis,
+                PermissionFlagsBits.EmbedLinks,
+                PermissionFlagsBits.AttachFiles,
+            ]);
+
+            if(!newPerms) return false;
+            else return true;
+
+        }
+
+        const catPerms = await setCategoryPermissions(interaction, gptCategory);
+        if(!catPerms) {
+            return await interaction.reply({
+                content: translate(user, "config", "missingPermissions")
+            })
+        }
+
+
         const server = await serverSchema.findOne({
             _id: guild!.id,
         });

@@ -7,8 +7,8 @@ const serverSchema = new Schema<serverSchema>({
     channels: {
         gptCategory: { type: String, required: true },
         gpteCategory: { type: String, required: true },
-        bingCategory: { type: String, required: true },
-        commandsChannel: { type: String, required: true },
+        customCategory: { type: String, required: true },
+        // commandsChannel: { type: String, required: true },
         // welcomeChannel: { type: String, required: false },
         // rulesChannel: { type: String, required: false },
     },

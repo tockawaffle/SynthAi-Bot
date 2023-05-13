@@ -26,7 +26,10 @@ export default {
         interaction: CommandInteraction;
         user: User;
     }) => {
-        const isOptedOut = await optedOut.findOne({ _id: "optedOut", ids: { $in: [user.id] } })
+        const isOptedOut = await optedOut.findOne({
+            _id: "optedOut",
+            ids: { $in: [user.id] },
+        });
         if (isOptedOut) {
             return await interaction.reply({
                 content:
