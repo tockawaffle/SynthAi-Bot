@@ -16,6 +16,8 @@ import GpteReply from "../replyFunctions/GpteReply";
 import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 import checkPerms from "../../configs/validators/commands/runtime/checkPerms";
 import CustomReply from "../replyFunctions/CustomReply";
+import BardReply from "../replyFunctions/BardReply";
+import BardChannels from "../../configs/database/functions/BardChannels";
 
 module.exports = {
     name: Events.MessageCreate,
@@ -49,6 +51,7 @@ module.exports = {
         const GptShouldReply = GptChannels(author, thisChn);
         const GpteShouldReply = GpteChannels(author, thisChn);
         const CustomShouldReply = CustomChannels(author, thisChn);
+        const BardShouldReply = BardChannels(author, thisChn);
 
         if (GptShouldReply) {
             return await GptReply(message, hasOptedOut);
@@ -56,6 +59,8 @@ module.exports = {
             return await GpteReply(message, hasOptedOut);
         } else if (CustomShouldReply) {
             return await CustomReply(message, hasOptedOut, CustomShouldReply.personality);
+        } else if (BardShouldReply) {
+            return await BardReply(message, hasOptedOut);
         }
     },
 };

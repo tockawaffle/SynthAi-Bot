@@ -40,8 +40,14 @@ export default {
             );
         }
 
-        const categories = ["AI", "Configuration", "Credits", "Utilities"];
-        const emojis = ["🤖", "⚙️", "📜", "💼"];
+        const categories = [
+            "AI",
+            "Configuration",
+            "Utilities",
+            "Credits",
+            "FAQ",
+        ];
+        const emojis = ["🤖", "⚙️", "💼", "📜", "🗂️"];
 
         return await interaction.reply({
             embeds: [

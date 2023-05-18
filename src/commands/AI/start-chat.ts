@@ -13,7 +13,7 @@ import userSchema from "../../configs/database/models/userSchema";
 import checkGuild from "../../configs/validators/commands/runtime/checkGuild";
 import checkPerms from "../../configs/validators/commands/runtime/checkPerms";
 import optedOut from "../../configs/database/models/optedOut";
-import { GPT, GPT3E, help } from "../../configs/commands/exports";
+import { Bard, GPT, GPT3E, help } from "../../configs/commands/exports";
 import davinci from "../../configs/commands/ais/custom/davinci";
 
 export default {
@@ -67,8 +67,8 @@ export default {
                             value: "gpt3e",
                         },
                         {
-                            name: "GPT-4 W/Ethernet (Not Available)",
-                            value: "gpt4e",
+                            name: "Google's Bard",
+                            value: "bard",
                         },
                     ],
                 },
@@ -189,120 +189,89 @@ export default {
                         channels: {
                             gptCategory: 1,
                             gpteCategory: 1,
+                            bardCategory: 1,
                         },
                     }
                 );
+
+                const catToChat = {
+                    gptCategory: "gptChat",
+                    gpteCategory: "gpteChat",
+                    bardCategory: "bardChat",
+                };
+
+                async function categoryGet(
+                    cat: "gptCategory" | "gpteCategory" | "bardCategory"
+                ) {
+                    const category = getCategory!.channels[cat] as
+                        | string
+                        | undefined;
+
+                    const handleError = async (messageKey: string) => {
+                        await interaction.reply({
+                            content: client.translate(
+                                user,
+                                "startChat",
+                                messageKey
+                            ),
+                            ephemeral: true,
+                        });
+                        return {
+                            category,
+                            newChat: undefined,
+                        };
+                    };
+
+                    if (!category || category.length <= 0) {
+                        return handleError("categoryNotSet");
+                    }
+
+                    const chat = catToChat[cat];
+
+                    const newChat = await userSchema.findOne(
+                        { _id: user.id },
+                        { channels: { [chat]: 1 } }
+                    );
+                    if (!newChat) {
+                        return handleError("noUserDb");
+                    }
+
+                    return {
+                        category,
+                        newChat,
+                    };
+                }
 
                 const getChoice = interaction.options.get("model", true)
                     .value as string;
 
                 switch (getChoice) {
                     case "gpt3": {
-                        const category = getCategory!.channels.gptCategory as
-                            | string
-                            | undefined;
-                        if (!category || category.length <= 0) {
-                            return await interaction.reply({
-                                content: client.translate(
-                                    user,
-                                    "startChat",
-                                    "categoryNotSet"
-                                ),
-                                ephemeral: true,
-                            });
-                        }
-
-                        const newChat = await userSchema.findOne(
-                            { _id: user.id },
-                            { channels: { gptChat: 1 } }
+                        const { category, newChat } = await categoryGet(
+                            "gptCategory"
                         );
-
-                        if (!newChat) {
-                            return await interaction.reply({
-                                content: client.translate(
-                                    user,
-                                    "startChat",
-                                    "noUserDb"
-                                ),
-                                ephemeral: true,
-                            });
-                        }
+                        if (!category || !newChat) return;
 
                         await GPT(interaction, newChat, category);
                         break;
                     }
                     case "gpt3e": {
-                        const category = getCategory!.channels.gpteCategory as
-                            | string
-                            | undefined;
-                        if (!category || category.length <= 0) {
-                            return await interaction.reply({
-                                content: client.translate(
-                                    user,
-                                    "startChat",
-                                    "categoryNotSet"
-                                ),
-                                ephemeral: true,
-                            });
-                        }
-
-                        const newChat = await userSchema.findOne(
-                            { _id: user.id },
-                            { channels: { gpteChat: 1 } }
+                        const { category, newChat } = await categoryGet(
+                            "gpteCategory"
                         );
-
-                        if (!newChat) {
-                            return await interaction.reply({
-                                content: client.translate(
-                                    user,
-                                    "startChat",
-                                    "noUserDb"
-                                ),
-                                ephemeral: true,
-                            });
-                        }
+                        if (!category || !newChat) return;
 
                         await GPT3E(interaction, newChat, category);
                         break;
                     }
-                    case "gpt4e": {
-                        return await interaction.reply({
-                            content:
-                                "This option is going through a major rework. Please use the other options for now.",
-                            ephemeral: true,
-                        });
+                    case "bard": {
+                        const { category, newChat } = await categoryGet(
+                            "bardCategory"
+                        );
+                        if (!category || !newChat) return;
 
-                        // const category = getCategory!.channels.gpteCategory as
-                        //     | string
-                        //     | undefined;
-                        // if (!category || category.length <= 0) {
-                        //     return await interaction.reply({
-                        //         content: client.translate(
-                        //             user,
-                        //             "startChat",
-                        //             "categoryNotSet"
-                        //         ),
-                        //         ephemeral: true,
-                        //     });
-                        // }
-
-                        // const newChat = await userSchema.findOne(
-                        //     { _id: user.id },
-                        //     { channels: { gpteChat: 1 } }
-                        // );
-
-                        // if (!newChat) {
-                        //     return await interaction.reply({
-                        //         content: client.translate(
-                        //             user,
-                        //             "startChat",
-                        //             "noUserDb"
-                        //         ),
-                        //         ephemeral: true,
-                        //     });
-                        // }
-
-                        // await GPTE(interaction, category, newChat);
+                        await Bard(interaction, newChat, category);
+                        break;
                     }
                 }
                 break;

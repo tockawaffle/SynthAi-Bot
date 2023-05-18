@@ -30,6 +30,9 @@ const userSchema = new Schema<userSchema>({
         gpteChat: {
             chat: { type: Array, required: true },
         },
+        bardChat: {
+            chat: { type: Array, required: true },
+        },
         customChat: {
             chat: { type: Array, required: true },
         },

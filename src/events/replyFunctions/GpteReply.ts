@@ -1,4 +1,3 @@
-import { client } from "../../bot";
 import { Message } from "discord.js";
 import moderate from "../__dev/moderation";
 import tokenHandler from "../../configs/ais/handlers/gptTokenHandler";
@@ -9,7 +8,7 @@ import axios from "axios";
 import switcher from "../../configs/commands/ais/ethernet/switcher";
 
 export default async function (message: Message, hasOptedOut: boolean) {
-    const { author } = message;
+    const { author, client } = message;
     if (message.content.length <= 0) return;
     message.channel.sendTyping();
 
@@ -52,7 +51,7 @@ export default async function (message: Message, hasOptedOut: boolean) {
         let content: string = "";
         const toggler = await switcher();
         if (toggler) {
-            const reply = await axios.get(process.env.PROXY_API + "/ask", {
+            const reply = await axios.get(process.env.GPTE_API + "/ask", {
                 params: {
                     prompt: message.content,
                     model: "you",

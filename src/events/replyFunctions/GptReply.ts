@@ -1,11 +1,10 @@
 import { Message, TextChannel } from "discord.js";
-import { client } from "../../bot";
 import tokenHandler from "../../configs/ais/handlers/gptTokenHandler";
 import handleMessageMemory from "../../configs/ais/handlers/handleMessageMemory";
 import moderate from "../__dev/moderation";
 
 export default async function (message: Message, hasOptedOut: boolean) {
-    const { author } = message;
+    const { author, client } = message;
     if (message.content.length <= 0) return;
     message.channel.sendTyping();
 

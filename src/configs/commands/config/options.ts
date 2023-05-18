@@ -40,6 +40,20 @@ export default [
                     },
                 ],
             },
+            {
+                name: "bard-category",
+                description:
+                    "Set the category so the chat creates a channel for each user.",
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: "category",
+                        description: "Set the category.",
+                        type: ApplicationCommandOptionType.Channel,
+                        required: true,
+                    },
+                ],
+            },
             // {
             //     name: "custom-category",
             //     description:

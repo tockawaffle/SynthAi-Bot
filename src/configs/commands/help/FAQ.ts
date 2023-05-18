@@ -1,41 +1,35 @@
-import WOK from "@tockawa/wokcommands";
 import {
     ActionRowBuilder,
     EmbedBuilder,
     StringSelectMenuBuilder,
     StringSelectMenuInteraction,
 } from "discord.js";
-import returnCat from "./functions/returnCat";
 
-export default async (menu: StringSelectMenuInteraction, instance: WOK) => {
+export default async (menu: StringSelectMenuInteraction) => {
     const { user, client } = menu;
-    
-    const AI = await returnCat(instance, user, "AI")
 
-    const categories = ["Configuration","Utilities", "Credits", "FAQ", "Main Page", ];
-    const emojis = ["⚙️", "🛠️", "📜", "🗂️", "🏠", ];
+    const categories = [
+        "AI",
+        "Configuration",
+        "Utilities",
+        "Credits",
+        "Main Page",
+    ];
+    const emojis = ["🤖", "⚙️", "🛠️", "📜", "🏠"];
 
-    return await menu.update({
+    return await menu.reply({
         embeds: [
             new EmbedBuilder()
-                .setTitle(client.translate(user, "help", "aiCatTitle"))
-                .setDescription(
-                    AI.map((command) => {
-                        const options = command.options?.map((option) => {
-                            return `\n${option.name} - ${option.description}`;
-                        });
-
-                        return `\n\`\`\`${command.name} - ${
-                            command.description
-                        }\n\n${client.translate(
-                            user,
-                            "help",
-                            "aiCatOp"
-                        )}\n${options}\`\`\``;
-                    }).join("\n")
+                .setAuthor({
+                    name: client.user!.username,
+                    iconURL: client.user!.displayAvatarURL(),
+                })
+                .setTitle(
+                    client
+                        .translate(user, "help", "helpTitle")
+                        .replace("%botName%", client.user!.username)
                 )
-                .setColor("Random")
-                .setTimestamp()
+                .setDescription(client.translate(user, "help", "faqCatDesc"))
                 .setFooter({
                     text: client
                         .translate(user, "help", "helpFooter")
@@ -47,10 +41,8 @@ export default async (menu: StringSelectMenuInteraction, instance: WOK) => {
                         .get(process.env.OWNER_ID!)!
                         .displayAvatarURL(),
                 })
-                .setAuthor({
-                    name: client.user!.username,
-                    iconURL: client.user!.displayAvatarURL(),
-                }),
+                .setColor("Random")
+                .setTimestamp(),
         ],
         components: [
             new ActionRowBuilder().addComponents(
@@ -73,5 +65,6 @@ export default async (menu: StringSelectMenuInteraction, instance: WOK) => {
                     )
             ) as ActionRowBuilder<StringSelectMenuBuilder>,
         ],
+        ephemeral: true,
     });
 };

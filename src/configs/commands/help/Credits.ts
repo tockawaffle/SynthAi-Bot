@@ -9,8 +9,8 @@ import {
 export default async (menu: StringSelectMenuInteraction) => {
     const { user, client } = menu;
 
-    const categories = ["AI", "Configuration", "Main Page"];
-    const emojis = ["🤖", "⚙️", "🏠"];
+    const categories = ["AI", "Configuration", "Utilities", "FAQ", "Main Page", ];
+    const emojis = ["🤖", "⚙️", "🛠️", "🗂️", "🏠"];
 
     return await menu.reply({
         embeds: [

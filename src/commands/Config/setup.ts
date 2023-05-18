@@ -7,6 +7,7 @@ import {
     language,
     gpteCategory,
     customCategory,
+    bardCategory,
 } from "../../configs/commands/exports";
 import handleOptedOut from "../../configs/database/functions/handleOptedOut";
 
@@ -50,6 +51,7 @@ export default {
                 const SubCommand = {
                     GPT_CATEGORY: "gpt-category",
                     GPTE_CATEGORY: "gpte-category",
+                    BARD_CATEGORY: "bard-category",
                     CUSTOM_CATEGORY: "custom-category",
                 };
 
@@ -67,6 +69,11 @@ export default {
                     }
                     case SubCommand.CUSTOM_CATEGORY: {
                         await customCategory(interaction);
+                        break;
+                    }
+                    case SubCommand.BARD_CATEGORY: {
+                        await bardCategory(interaction);
+                        break;
                     }
                 }
             }

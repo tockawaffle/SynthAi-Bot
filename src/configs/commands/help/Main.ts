@@ -1,4 +1,3 @@
-import WOK, { Command } from "@tockawa/wokcommands";
 import {
     ActionRowBuilder,
     EmbedBuilder,
@@ -9,8 +8,8 @@ import {
 export default async (menu: StringSelectMenuInteraction) => {
     const { user, client } = menu;
     
-    const categories = ["AI", "Configuration", "Credits"];
-    const emojis = ["🤖", "⚙️", "📜"];
+    const categories = ["AI", "Configuration", "Utilities", "Credits", "FAQ"];
+    const emojis = ["🤖", "⚙️", "🛠️", "📜", "🗂️"];
     
     return await menu.reply({
         embeds: [

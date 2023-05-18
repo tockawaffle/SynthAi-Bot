@@ -1,80 +1,26 @@
-import WOK, { Command } from "@tockawa/wokcommands";
+import WOK from "@tockawa/wokcommands";
 import {
     ActionRowBuilder,
     EmbedBuilder,
     StringSelectMenuBuilder,
     StringSelectMenuInteraction,
 } from "discord.js";
+import returnCat from "./functions/returnCat";
 
 export default async (menu: StringSelectMenuInteraction, instance: WOK) => {
-    let AI: {
-        name: string;
-        description: string;
-        options?: {
-            name: string;
-            description: string;
-        }[];
-    }[] = [];
     const { user, client } = menu;
-    let lang: string = user.lang;
+    
+    const Config = await returnCat(instance, user, "Configuration")
 
-    switch (lang) {
-        case "english":
-            lang = "en-US";
-            break;
-        case "portugues":
-            lang = "pt-BR";
-            break;
-        default:
-            lang = "en-US";
-            break;
-    }
-
-    const selLang = lang as "en-US" | "pt-BR";
-
-    await instance.commandHandler.commands.forEach((command: Command) => {
-        const isAiCategory = command.commandObject.category === "Configuration";
-
-        if (isAiCategory) {
-            const options = command.commandObject.options;
-            const commandName =
-                command.commandObject.nameLocalizations![selLang] ??
-                command.commandName;
-            const commandDescription =
-                command.commandObject.descriptionLocalizations![selLang] ??
-                command.commandObject.description;
-            const commandOptions = options?.map((option) => {
-                const optionName =
-                    option.nameLocalizations![selLang] ?? option.name;
-                const optionDescription =
-                    option.descriptionLocalizations![selLang] ??
-                    option.description;
-
-                return {
-                    name: optionName,
-                    description: optionDescription,
-                };
-            });
-
-            AI.push({
-                name: commandName,
-                description: commandDescription,
-                options: commandOptions,
-            });
-        } else {
-            return null;
-        }
-    });
-
-    const categories = ["AI", "Credits", "Main Page"];
-    const emojis = ["🤖", "📜", "🏠"];
+    const categories = ["AI", "Utilities", "Credits", "FAQ", "Main Page"];
+    const emojis = ["🤖", "🛠️", "📜", "🗂️", "🏠"];
 
     return await menu.update({
         embeds: [
             new EmbedBuilder()
                 .setTitle(client.translate(user, "help", "confCatTitle"))
                 .setDescription(
-                    AI.map((command) => {
+                    Config.map((command) => {
                         const options = command.options?.map((option) => {
                             return `\n${option.name} - ${option.description}`;
                         });

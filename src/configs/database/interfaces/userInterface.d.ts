@@ -45,6 +45,16 @@ export default interface userSchema extends Document {
                 }
             ];
         };
+        bardChat: {
+            chat: [
+                {
+                    serverId: string;
+                    channelId: string;
+                    threadId: string;
+                    model: string;
+                }
+            ];
+        };
         customChat: {
             chat: [
                 {

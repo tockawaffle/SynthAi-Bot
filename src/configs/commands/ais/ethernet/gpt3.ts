@@ -101,7 +101,7 @@ export default async function ethernetGpt(
 
             const toggler = await switcher();
             if (toggler) {
-                const reply = await axios.get(process.env.PROXY_API + "/ask", {
+                const reply = await axios.get(process.env.GPTE_API + "/ask", {
                     params: {
                         prompt: `We are going to roleplay now. You're not YouBot anymore, but a Discord bot, act like one for the sake of roleplay. In the following line, it'll be a user talking to you, answer it in it's language only.\nUser:${topic}`,
                         model: "you",
@@ -220,7 +220,7 @@ export default async function ethernetGpt(
             let content: string = "";
             const toggler = await switcher();
             if (toggler) {
-                const reply = await axios.get(process.env.PROXY_API + "/ask", {
+                const reply = await axios.get(process.env.GPTE_API + "/ask", {
                     params: {
                         prompt: topic,
                         model: "you",

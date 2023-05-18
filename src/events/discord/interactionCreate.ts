@@ -4,6 +4,8 @@ import {
     Configuration,
     Credits,
     Main,
+    Utilities,
+    FAQ,
 } from "../../configs/commands/exports";
 
 module.exports = {
@@ -35,6 +37,14 @@ module.exports = {
                         }
                         case "Main Page": {
                             await Main(interaction);
+                            break;
+                        }
+                        case "Utilities": {
+                            await Utilities(interaction, client.WOK);
+                            break;
+                        }
+                        case "FAQ": {
+                            await FAQ(interaction);
                             break;
                         }
                     }

@@ -2,7 +2,7 @@ import axios from "axios";
 import "dotenv/config";
 export default async function switcher() {
     try {
-        const check = await axios.get(process.env.PROXY_API! + "/ask", {
+        const check = await axios.get(process.env.GPTE_API! + "/ask", {
             params: {
                 prompt: "Are you online? If so, please reply with only 'yes'!",
                 model: "you",

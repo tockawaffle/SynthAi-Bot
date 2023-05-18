@@ -1,4 +1,4 @@
-import WOK from "@tockawa/wokcommands";
+import WOK, { Command } from "@tockawa/wokcommands";
 import {
     ActionRowBuilder,
     EmbedBuilder,
@@ -9,21 +9,23 @@ import returnCat from "./functions/returnCat";
 
 export default async (menu: StringSelectMenuInteraction, instance: WOK) => {
     const { user, client } = menu;
-    
-    const AI = await returnCat(instance, user, "AI")
 
-    const categories = ["Configuration","Utilities", "Credits", "FAQ", "Main Page", ];
-    const emojis = ["⚙️", "🛠️", "📜", "🗂️", "🏠", ];
+    const Utils = await returnCat(instance, user, "Utilities");
+
+    const categories = ["AI", "Configuration", "Credits", "FAQ", "Main Page"];
+    const emojis = ["🤖", "⚙️", "📜", "🗂️", "🏠"];
 
     return await menu.update({
         embeds: [
             new EmbedBuilder()
-                .setTitle(client.translate(user, "help", "aiCatTitle"))
+                .setTitle(client.translate(user, "help", "utilsCatTitle"))
                 .setDescription(
-                    AI.map((command) => {
-                        const options = command.options?.map((option) => {
+                    Utils.map((command) => {
+                        let options = command.options?.map((option) => {
                             return `\n${option.name} - ${option.description}`;
                         });
+
+                        if (!options) options = [""];
 
                         return `\n\`\`\`${command.name} - ${
                             command.description

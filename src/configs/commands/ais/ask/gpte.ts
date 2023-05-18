@@ -23,7 +23,7 @@ export default async (interaction: CommandInteraction) => {
     let content: string = "";
     const toggler = await switcher();
     if (toggler) {
-        const reply = await axios.get(process.env.PROXY_API + "/ask", {
+        const reply = await axios.get(process.env.GPTE_API + "/ask", {
             params: {
                 prompt: topic,
                 model: "you",

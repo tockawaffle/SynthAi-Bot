@@ -1,6 +1,6 @@
 {
     "name": "synth-bot",
-    "version": "0.8.1",
+    "version": "0.8.5",
     "description": "A Discord bot that uses many different AI to generate text and images.",
     "main": "dist/src/bot.js",
     "scripts": {
@@ -21,7 +21,8 @@
         "IA",
         "Discord",
         "Bot",
-        "Bot"
+        "Bard",
+        "Google Bard"
     ],
     "author": "tockawaffle",
     "license": "AGPL-3.0",
@@ -36,27 +37,28 @@
         "@tockawa/openai-plugin": "^1.0.1",
         "@tockawa/wokcommands": "^2.1.4",
         "axios": "^1.4.0",
+        "axios-https-proxy-fix": "^0.17.1",
         "cheerio": "^1.0.0-rc.12",
         "discord.js": "^14.11.0",
         "dotenv": "^16.0.3",
+        "googlebard": "^1.0.5",
         "gpt-3-encoder": "^1.1.4",
-        "jspteroapi": "^1.11.1",
         "moment": "^2.29.4",
         "openai": "^3.2.1",
         "topgg-autoposter": "^2.0.1",
+        "uuid": "^9.0.0",
         "ytdl-core": "^4.11.4"
     },
     "devDependencies": {
         "@types/axios": "^0.14.0",
         "@types/node": "^20.1.0",
-        "node_characterai": "^1.1.3",
+        "@types/uuid": "^9.0.1",
         "typescript": "^5.0.4"
     },
     "nodemonConfig": {
         "ignore": [
             "node_modules",
-            "dist",
-            "src/assets/"
+            "dist"
         ],
         "watch": [
             "src",
