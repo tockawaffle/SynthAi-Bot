@@ -143,6 +143,8 @@ BARD_PROXY_PASSWORD=
 ! You can get a proxy by using [this](https://www.vultr.com/?ref=9457693) link ( referer link ) to create an account on Vultr, and then create a proxy instance. Tutorial [here](https://www.vultr.com/docs/install-squid-proxy-on-ubuntu/). If you don't want to use a proxy, you should remove the proxy settings from the code. (src/configs/ais/chatBased/bard/sing.ts @ line 9-19)
 If you wish to create a proxy, but don't want to do the heavy lifting, I might be able set it up for you for a small fee of 5 USD.
 
+If you're using your own proxy (Mainly the squid proxy) and find yourself getting an error thrown while trying to use bard, please refer to [this](https://github.com/PawanOsman/GoogleBard/issues/10) issue.
+
 Install NodeJs >= v18.0.0 and run the following commands:
 
 ```bash
