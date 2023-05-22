@@ -1,7 +1,6 @@
 import { CommandInteraction, GuildChannel } from "discord.js";
 import moderate from "../../../../../events/__dev/moderation";
 import dalleTokenHandler from "../../../../ais/handlers/dalleTokenHandler";
-import customModeration from "./customModeration";
 
 export default async (interaction: CommandInteraction) => {
     const { user, client } = interaction;
@@ -14,24 +13,10 @@ export default async (interaction: CommandInteraction) => {
     const moderation = await moderate(interaction, prompt);
     if (moderation) return;
 
-    const secondMod = await customModeration(
-        prompt,
-        interaction.channel as GuildChannel
-    );
-    if (secondMod)
-        return await interaction.reply({
-            content: client
-                .translate(user, "image", "customModeration")
-                .replace("%w", secondMod.word)
-                .replace("%r", secondMod.reason)
-                .replace("%g", secondMod.gravity.toString()),
-            ephemeral: true,
-        });
+    await interaction.deferReply();
 
     const token = await dalleTokenHandler(interaction, size);
     if (!token) return;
-
-    await interaction.deferReply();
 
     try {
         const image = await client.openai.createImage({

@@ -1,6 +1,5 @@
 import { REST } from "discord.js";
 import { OpenAIApi } from "openai";
-import { ChatGPTAPI } from "chatgpt";
 import { OpenAIPluginApi } from "@tockawa/openai-plugin";
 import { Bard } from "googlebard";
 import WOK from "@tockawa/wokcommands";

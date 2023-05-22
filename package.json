@@ -1,6 +1,6 @@
 {
     "name": "synth-bot",
-    "version": "0.8.5",
+    "version": "0.8.6",
     "description": "A Discord bot that uses many different AI to generate text and images.",
     "main": "dist/src/bot.js",
     "scripts": {
